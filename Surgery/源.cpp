@@ -6,10 +6,9 @@
 
 
 #include "Program.h"
-#include "Window.h"
+#include "WindowYH.h"
 
 #include "Model.h"
-#include "Haptic.h"
 
 #include <glm/gtc/matrix_transform.hpp>
 #include <time.h>
@@ -43,7 +42,7 @@ nanogui::ref<nanogui::Window> nanoguiWindow_light;
 //window
 int16_t IMAGE_WIDTH = 1320;
 int16_t IMAGE_HEIGHT = 800;
-Window *g_pWindow;
+WindowYH *g_pWindow;
 
 
 // Mouse Movement 
@@ -120,7 +119,7 @@ int main(int argc, char** argv)
 	std::srand(time(NULL));
 
 	//create window
-	g_pWindow = new Window("Fur Simulation", IMAGE_WIDTH, IMAGE_HEIGHT);
+	g_pWindow = new WindowYH("Fur Simulation", IMAGE_WIDTH, IMAGE_HEIGHT);
 	g_pWindow->SetKeyCallback(key_callback);
 	g_pWindow->SetCursorPosCallback(mouse_callback);
 	g_pWindow->SetWindowSizeCallback(windowsize_callback);
@@ -190,32 +189,32 @@ int main(int argc, char** argv)
 	}
 
 	//point cloud
-	readASC("../resources/PointClouds/bunny.asc", pointCloud, pointCount);
+	_ReadASC("../resources/PointClouds/SoftBunny-1858-43250p.asc", pointCloud, pointCount);
 
 	//models
-	model.LoadFromFile("../resources/bunny.obj");
+	model.LoadFromFile("../resources/obsolete/bunny.obj");
 	model.SetUpGLBuffer(GL_STATIC_DRAW);
-	cursor.LoadFromFile("../resources/Cone.obj");
+	cursor.LoadFromFile("../resources/obsolete/Cone.obj");
 	cursor.SetUpGLBuffer(GL_STATIC_DRAW);
 
+	int _size = 0;
+	glGetIntegerv(GL_MAX_GEOMETRY_OUTPUT_VERTICES, &_size);
 
 	//load shader & init
 	std::vector<ShaderYH> shaders;
-	shaders.push_back(ShaderYH::ShaderYHFromFile("../resources/HeadShader.vs", GL_VERTEX_SHADER));
-	shaders.push_back(ShaderYH::ShaderYHFromFile("../resources/HeadShader.frag", GL_FRAGMENT_SHADER));
+	shaders.push_back(ShaderYH::ShaderYHFromFile("../resources/obsolete/HeadShader.vs", GL_VERTEX_SHADER));
+	shaders.push_back(ShaderYH::ShaderYHFromFile("../resources/obsolete/HeadShader.frag", GL_FRAGMENT_SHADER));
 	g_pHeadProgram = new Program(shaders);
 
 	shaders.clear();
-	shaders.push_back(ShaderYH::ShaderYHFromFile("../resources/pointCloudShader.vs", GL_VERTEX_SHADER));
-	shaders.push_back(ShaderYH::ShaderYHFromFile("../resources/pointCloudShader.frag", GL_FRAGMENT_SHADER));
+	shaders.push_back(ShaderYH::ShaderYHFromFile("../resources/obsolete/pointCloudShader.vs", GL_VERTEX_SHADER));
+	shaders.push_back(ShaderYH::ShaderYHFromFile("../resources/obsolete/pointCloudShader.geom", GL_GEOMETRY_SHADER));
+	shaders.push_back(ShaderYH::ShaderYHFromFile("../resources/obsolete/pointCloudShader.frag", GL_FRAGMENT_SHADER));
 	g_pPointCloudProgram = new Program(shaders);
 
 	//set up point cloud
 	setUpPointCloud();
 
-
-	//haptic
-	Haptic::InitHL();
 
 	// Game loop
 	while (!g_pWindow->ShouldClose())
@@ -242,7 +241,7 @@ int main(int argc, char** argv)
 		//model
 		if (isDrawModel)
 		{
-			g_pHeadProgram->Use();
+			/*g_pHeadProgram->Use();
 			{
 				g_pHeadProgram->SetUniform("projection", projMat);
 				g_pHeadProgram->SetUniform("modelView", modelView);
@@ -263,51 +262,19 @@ int main(int argc, char** argv)
 				glBindVertexArray(model.VAO);
 				glDrawElements(GL_TRIANGLES, model.indices.size(), GL_UNSIGNED_INT, model.indices.data());
 				glBindVertexArray(0);
-
-				//haptic
-				int viewport[4] = {0, 0, pixelWidth, pixelHeight};
-				double modelViewArray[16];
-				MatToArray(modelView, modelViewArray);
-				Haptic::UpdateWorkspace(modelView, projMat, viewport);
-				hlMatrixMode(HL_MODELVIEW);
-				hlLoadMatrixd(modelViewArray);
-
-				hlBeginFrame();
-				{
-					hlMaterialf(HL_FRONT_AND_BACK, HL_STIFFNESS, 0.7f);
-					hlMaterialf(HL_FRONT_AND_BACK, HL_DAMPING, 0.1f);
-					hlMaterialf(HL_FRONT_AND_BACK, HL_STATIC_FRICTION, 0.2f);
-					hlMaterialf(HL_FRONT_AND_BACK, HL_DYNAMIC_FRICTION, 0.3f);
-
-					hlBeginShape(HL_SHAPE_FEEDBACK_BUFFER, Haptic::gShapeId);
-					{
-						glBindVertexArray(model.VAO);
-						glDrawElements(GL_TRIANGLES, model.indices.size(), GL_UNSIGNED_INT, model.indices.data());
-						glBindVertexArray(0);
-					}
-					hlEndShape();
-				}
-				hlEndFrame();
-
-				//cursor
-				double proxyTransform[16];
-				hlGetDoublev(HL_PROXY_TRANSFORM, proxyTransform);
-				glm::mat4 proxyTransMat;
-				ArrayToMat(proxyTransform, proxyTransMat);
-				proxyTransMat = glm::scale(proxyTransMat, glm::vec3(Haptic::gCursorScale));
-				g_pHeadProgram->SetUniform("modelView", modelView * proxyTransMat);
-				glBindVertexArray(cursor.VAO);
-				glDrawElements(GL_TRIANGLES, cursor.indices.size(), GL_UNSIGNED_INT, cursor.indices.data());
-				glBindVertexArray(0);
 			}
-			g_pHeadProgram->End();
+			g_pHeadProgram->End();*/
 		}
 	
 		//point cloud
-		/*g_pPointCloudProgram->Use();
+		g_pPointCloudProgram->Use();
 		{
 			g_pPointCloudProgram->SetUniform("projection", projMat);
 			g_pPointCloudProgram->SetUniform("modelView", modelView);
+
+			g_pPointCloudProgram->SetUniform("radius", 0.05f);
+			g_pPointCloudProgram->SetUniform("lats", 10);
+			g_pPointCloudProgram->SetUniform("longs", 10);
 
 			g_pPointCloudProgram->SetUniform("surfaceColor", glm::vec3(headMat.modelSurfaceColor.r(), headMat.modelSurfaceColor.g(), headMat.modelSurfaceColor.b()));
 
@@ -315,39 +282,7 @@ int main(int argc, char** argv)
 			glDrawArrays(GL_POINTS, 0, pointCount);
 			glBindVertexArray(0);
 		}
-		g_pPointCloudProgram->End();*/
-
-		//haptic render
-		/*int viewport[4];
-		glGetIntegerv(GL_VIEWPORT, viewport);
-		Haptic::UpdateWorkspace(modelView, projMat, viewport);
-		Haptic::DrawSceneHaptics(&model, GLInfo::headVAO, GL_TRIANGLES, true);*/
-
-		//cursor
-		/*g_pHeadProgram->Use();
-		{
-			glm::mat4 cursorModelView = Haptic::GetProxyTransform();//¾ØÕóÓÐÎÊÌâ£¡
-			cursorModelView = glm::scale(cursorModelView, glm::vec3(Haptic::gCursorScale, Haptic::gCursorScale, Haptic::gCursorScale));
-
-			g_pHeadProgram->SetUniform("projection", projMat);
-			g_pHeadProgram->SetUniform("modelView", modelView * cursorModelView);
-
-			g_pHeadProgram->SetUniform("lightPosition", light.lightPos);
-			g_pHeadProgram->SetUniform("lightAmbient", light.lightAmbient);
-			g_pHeadProgram->SetUniform("lightDiffuse", light.lightDiffuse);
-			g_pHeadProgram->SetUniform("lightSpecular", light.lightSpecular);
-
-			g_pHeadProgram->SetUniform("lightConstant", light.lightConstant);
-			g_pHeadProgram->SetUniform("lightLinear", light.lightLinear);
-			g_pHeadProgram->SetUniform("lightQuadratic", light.lightQuadratic);
-
-			g_pHeadProgram->SetUniform("surfaceColor", glm::vec3(headMat.modelSurfaceColor.r(), headMat.modelSurfaceColor.g(), headMat.modelSurfaceColor.b()));
-			g_pHeadProgram->SetUniform("materialSpecular", headMat.materialSpecular);
-			g_pHeadProgram->SetUniform("materialShininess", headMat.materialShininess);
-
-			DrawGL_Model(cursor, GLInfo::cursorVAO, GL_TRIANGLES, true);
-		}
-		g_pHeadProgram->End();*/
+		g_pPointCloudProgram->End();
 
 
 		// Draw nanogui
@@ -366,8 +301,6 @@ int main(int argc, char** argv)
 	delete g_pHeadProgram;
 	delete g_pPointCloudProgram;
 
-	//delete haptic
-	Haptic::ExitHandler();
 
 	return 0;
 }

@@ -1,7 +1,7 @@
 #include "Utilities.h"
 #include <fstream>
 
-unsigned TextureFromFile(const char* filename, int &width, int &height, bool isRGBA)
+/*unsigned TextureFromFile(const char* filename, int &width, int &height, bool isRGBA)
 {
 	GLuint textureID;
 	glGenTextures(1, &textureID);
@@ -43,7 +43,7 @@ Texture LoadTexture(string filename, string typeName, bool isRGBA)
 	tex.height = imgHeight;
 
 	return tex;
-}
+}*/
 
 void readObj(char *filename, ObjInfo& objInfo)
 {
@@ -201,9 +201,28 @@ void processMesh(aiMesh* mesh, const aiScene* scene, std::vector<Vert>& vertices
 	}
 }
 
-void readASC(char *filename, std::vector<glm::dvec3> &pointPos, int &pointCount)
+bool _AllisNum(std::string str)
 {
-	std::ifstream dataFile;
+	for (int i = 0; i < str.size(); i++)
+	{
+		int tmp = (int)str[i];
+		if (tmp >= 48 && tmp <= 57)
+		{
+			continue;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
+	return true;
+}
+
+
+bool _ReadASC(char *filename, std::vector<glm::dvec3> &_vertices, int &pointCount)
+{
+	/*std::ifstream dataFile;
 
 	dataFile.open(filename);
 
@@ -229,7 +248,42 @@ void readASC(char *filename, std::vector<glm::dvec3> &pointPos, int &pointCount)
 	}
 
 
+	dataFile.close();*/
+
+	std::ifstream dataFile;
+
+	dataFile.open(filename);
+
+	if (!dataFile)
+	{
+		std::cout << "文件路径有误，读取失败，按任意键退出。" << std::endl;
+		getchar();
+		return false;
+	}
+
+	std::string str;
+	_vertices.clear();
+	unsigned index = 0;
+
+	while (dataFile.peek() != EOF)
+	{
+		dataFile >> str;
+		if (str == "particles")
+		{
+			dataFile >> pointCount;
+		}
+		else if (_AllisNum(str) && index < pointCount)
+		{
+			double posX, posY, posZ;
+			dataFile >> posX >> posY >> posZ;
+			_vertices.push_back(glm::vec3(posX, posY, posZ));
+		}
+		std::getline(dataFile, str);
+	}
+
 	dataFile.close();
+
+	return true;
 }
 
 void MatToArray(glm::mat4 mat, double* dst)

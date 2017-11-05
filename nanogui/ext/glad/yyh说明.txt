@@ -1,0 +1,2 @@
+原来的文件中存放的是项目自带的glad(不包含拓展，core)
+当前目录下的include，src中存放的是自己下载的完整(各种拓展，compatibility)版的glad

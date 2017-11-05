@@ -13,132 +13,1514 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="SOIL2">
-      <UniqueIdentifier>{008b9577-2c9c-423a-b7aa-c121c8867beb}</UniqueIdentifier>
+    <Filter Include="nanogui">
+      <UniqueIdentifier>{ffdef930-61c6-4767-8152-addfa5978b25}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="nanogui\src">
+      <UniqueIdentifier>{fdda7219-9bb1-466b-9b5e-d93be5e75437}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="nanogui\ext%255ccoro">
+      <UniqueIdentifier>{5d6500bf-53f3-4673-a3ed-7c6071425899}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="nanogui\ext%255cnanovg">
+      <UniqueIdentifier>{d0c3e54c-2f83-4037-aa1b-f5197cccbf21}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GLAD">
+      <UniqueIdentifier>{7218db44-03c3-4216-a7d8-c025cdf023dc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="nothings-stb">
+      <UniqueIdentifier>{800df3e7-25e2-4c23-a31b-79b779f75934}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="chai3d">
+      <UniqueIdentifier>{6b5932f2-a91f-4b50-9d45-45d19aace49e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="chai3d\audio">
+      <UniqueIdentifier>{da721691-c499-4805-9f14-d79e49a45e6b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="chai3d\collisions">
+      <UniqueIdentifier>{13f557dc-82a6-41ad-ba29-2ce6933dba4e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="chai3d\devices">
+      <UniqueIdentifier>{131bbb04-f939-4d91-8181-1b33e5e3a0cf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="chai3d\display">
+      <UniqueIdentifier>{39b5d2f8-369b-47f7-9163-e5eba8d8bf04}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="chai3d\effects">
+      <UniqueIdentifier>{243e8fa4-9387-407c-8f03-2da0c6d1016d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="chai3d\files">
+      <UniqueIdentifier>{f499bd8f-6685-4904-bc9f-ca36071d46cc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="chai3d\forces">
+      <UniqueIdentifier>{1765a54b-461c-443a-a34f-d41b7bf8bcfc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="chai3d\graphics">
+      <UniqueIdentifier>{9bf08808-d99d-48d6-b1cb-80cf72d0a16f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="chai3d\lighting">
+      <UniqueIdentifier>{4d002b07-c3e3-43b9-a968-3ad0a38d8cb0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="chai3d\materials">
+      <UniqueIdentifier>{4fca5b99-6240-4dad-b987-f8ab0936eecb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="chai3d\math">
+      <UniqueIdentifier>{b5096fd0-76d0-45b2-8775-2e1acee65b18}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="chai3d\resources">
+      <UniqueIdentifier>{eb6d1363-8881-424e-96ac-c9b9c1f52deb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="chai3d\shaders">
+      <UniqueIdentifier>{3cb161e0-8203-43b9-b4f3-228b128fa9a7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="chai3d\system">
+      <UniqueIdentifier>{07ccadea-22fd-414b-ac62-cbf0f426667e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="chai3d\timers">
+      <UniqueIdentifier>{92919c94-6a65-402c-bb0d-81aecc681d39}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="chai3d\tools">
+      <UniqueIdentifier>{11690372-f210-439e-aa38-ce85784042f4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="chai3d\widgets">
+      <UniqueIdentifier>{51a0ca3f-4406-42f1-96a1-695c1faea450}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="chai3d\world">
+      <UniqueIdentifier>{96816309-e4cf-4efe-9546-5b28276d3209}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="external">
+      <UniqueIdentifier>{5b75f655-823a-4a41-aceb-87f85c30f4e5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="external\giflib">
+      <UniqueIdentifier>{158cbac0-f222-460a-9db7-a148e013f1ba}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="external\lib3ds">
+      <UniqueIdentifier>{f8c0c902-be8b-4d34-8731-1145e42d6cb5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="external\libjpeg">
+      <UniqueIdentifier>{8e486508-639e-4f6a-913e-270183591a3b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="external\libpng">
+      <UniqueIdentifier>{bf812c4a-719a-4d04-a59d-f8829c916fd4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="external\openal">
+      <UniqueIdentifier>{b63c37c1-8525-45a1-9208-a7d47a8ac6c2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="external\pugixml">
+      <UniqueIdentifier>{58826d0e-2c04-48bc-9c98-811a055657db}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="external\theoraplayer">
+      <UniqueIdentifier>{210d7e17-d271-4658-82d6-770dce81942d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\GLAD\src\glad.c">
+      <Filter>GLAD</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysModel.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="WindowYH.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Model.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
     <ClCompile Include="Program.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="ShaderYH.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="Vertex.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="Window.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="源.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\SOIL2\src\common\common.cpp">
-      <Filter>SOIL2</Filter>
-    </ClCompile>
-    <ClCompile Include="..\SOIL2\src\SOIL2\etc1_utils.c">
-      <Filter>SOIL2</Filter>
-    </ClCompile>
-    <ClCompile Include="..\SOIL2\src\SOIL2\image_DXT.c">
-      <Filter>SOIL2</Filter>
-    </ClCompile>
-    <ClCompile Include="..\SOIL2\src\SOIL2\image_helper.c">
-      <Filter>SOIL2</Filter>
-    </ClCompile>
-    <ClCompile Include="..\SOIL2\src\SOIL2\SOIL2.c">
-      <Filter>SOIL2</Filter>
-    </ClCompile>
     <ClCompile Include="Utilities.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="Model.cpp">
+    <ClCompile Include="SurgeryMain.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="PhysModel.cpp">
-      <Filter>源文件</Filter>
+    <ClCompile Include="..\external\giflib\src\dev2gif.c">
+      <Filter>external\giflib</Filter>
     </ClCompile>
-    <ClCompile Include="Haptic.cpp">
-      <Filter>源文件</Filter>
+    <ClCompile Include="..\external\giflib\src\dgif_lib.c">
+      <Filter>external\giflib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\giflib\src\egif_lib.c">
+      <Filter>external\giflib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\giflib\src\getarg.c">
+      <Filter>external\giflib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\giflib\src\gif_err.c">
+      <Filter>external\giflib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\giflib\src\gif_font.c">
+      <Filter>external\giflib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\giflib\src\gif_hash.c">
+      <Filter>external\giflib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\giflib\src\gifalloc.c">
+      <Filter>external\giflib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\giflib\src\qprintf.c">
+      <Filter>external\giflib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\giflib\src\quantize.c">
+      <Filter>external\giflib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\lib3ds\src\lib3ds_atmosphere.c">
+      <Filter>external\lib3ds</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\lib3ds\src\lib3ds_background.c">
+      <Filter>external\lib3ds</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\lib3ds\src\lib3ds_camera.c">
+      <Filter>external\lib3ds</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\lib3ds\src\lib3ds_chunk.c">
+      <Filter>external\lib3ds</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\lib3ds\src\lib3ds_chunktable.c">
+      <Filter>external\lib3ds</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\lib3ds\src\lib3ds_file.c">
+      <Filter>external\lib3ds</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\lib3ds\src\lib3ds_io.c">
+      <Filter>external\lib3ds</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\lib3ds\src\lib3ds_light.c">
+      <Filter>external\lib3ds</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\lib3ds\src\lib3ds_material.c">
+      <Filter>external\lib3ds</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\lib3ds\src\lib3ds_math.c">
+      <Filter>external\lib3ds</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\lib3ds\src\lib3ds_matrix.c">
+      <Filter>external\lib3ds</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\lib3ds\src\lib3ds_mesh.c">
+      <Filter>external\lib3ds</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\lib3ds\src\lib3ds_node.c">
+      <Filter>external\lib3ds</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\lib3ds\src\lib3ds_quat.c">
+      <Filter>external\lib3ds</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\lib3ds\src\lib3ds_shadow.c">
+      <Filter>external\lib3ds</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\lib3ds\src\lib3ds_track.c">
+      <Filter>external\lib3ds</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\lib3ds\src\lib3ds_util.c">
+      <Filter>external\lib3ds</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\lib3ds\src\lib3ds_vector.c">
+      <Filter>external\lib3ds</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\lib3ds\src\lib3ds_viewport.c">
+      <Filter>external\lib3ds</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\libjpeg\src\jaricom.c">
+      <Filter>external\libjpeg</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\libjpeg\src\jcapimin.c">
+      <Filter>external\libjpeg</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\libjpeg\src\jcapistd.c">
+      <Filter>external\libjpeg</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\libjpeg\src\jcarith.c">
+      <Filter>external\libjpeg</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\libjpeg\src\jccoefct.c">
+      <Filter>external\libjpeg</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\libjpeg\src\jccolor.c">
+      <Filter>external\libjpeg</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\libjpeg\src\jcdctmgr.c">
+      <Filter>external\libjpeg</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\libjpeg\src\jchuff.c">
+      <Filter>external\libjpeg</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\libjpeg\src\jcinit.c">
+      <Filter>external\libjpeg</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\libjpeg\src\jcmainct.c">
+      <Filter>external\libjpeg</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\libjpeg\src\jcmarker.c">
+      <Filter>external\libjpeg</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\libjpeg\src\jcmaster.c">
+      <Filter>external\libjpeg</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\libjpeg\src\jcomapi.c">
+      <Filter>external\libjpeg</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\libjpeg\src\jcparam.c">
+      <Filter>external\libjpeg</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\libjpeg\src\jcprepct.c">
+      <Filter>external\libjpeg</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\libjpeg\src\jcsample.c">
+      <Filter>external\libjpeg</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\libjpeg\src\jctrans.c">
+      <Filter>external\libjpeg</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\libjpeg\src\jdapimin.c">
+      <Filter>external\libjpeg</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\libjpeg\src\jdapistd.c">
+      <Filter>external\libjpeg</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\libjpeg\src\jdarith.c">
+      <Filter>external\libjpeg</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\libjpeg\src\jdatadst.c">
+      <Filter>external\libjpeg</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\libjpeg\src\jdatasrc.c">
+      <Filter>external\libjpeg</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\libjpeg\src\jdcoefct.c">
+      <Filter>external\libjpeg</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\libjpeg\src\jdcolor.c">
+      <Filter>external\libjpeg</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\libjpeg\src\jddctmgr.c">
+      <Filter>external\libjpeg</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\libjpeg\src\jdhuff.c">
+      <Filter>external\libjpeg</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\libjpeg\src\jdinput.c">
+      <Filter>external\libjpeg</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\libjpeg\src\jdmainct.c">
+      <Filter>external\libjpeg</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\libjpeg\src\jdmarker.c">
+      <Filter>external\libjpeg</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\libjpeg\src\jdmaster.c">
+      <Filter>external\libjpeg</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\libjpeg\src\jdmerge.c">
+      <Filter>external\libjpeg</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\libjpeg\src\jdpostct.c">
+      <Filter>external\libjpeg</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\libjpeg\src\jdsample.c">
+      <Filter>external\libjpeg</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\libjpeg\src\jdtrans.c">
+      <Filter>external\libjpeg</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\libjpeg\src\jerror.c">
+      <Filter>external\libjpeg</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\libjpeg\src\jfdctflt.c">
+      <Filter>external\libjpeg</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\libjpeg\src\jfdctfst.c">
+      <Filter>external\libjpeg</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\libjpeg\src\jfdctint.c">
+      <Filter>external\libjpeg</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\libjpeg\src\jidctflt.c">
+      <Filter>external\libjpeg</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\libjpeg\src\jidctfst.c">
+      <Filter>external\libjpeg</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\libjpeg\src\jidctint.c">
+      <Filter>external\libjpeg</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\libjpeg\src\jmemansi.c">
+      <Filter>external\libjpeg</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\libjpeg\src\jmemmgr.c">
+      <Filter>external\libjpeg</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\libjpeg\src\jquant1.c">
+      <Filter>external\libjpeg</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\libjpeg\src\jquant2.c">
+      <Filter>external\libjpeg</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\libjpeg\src\jutils.c">
+      <Filter>external\libjpeg</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\libpng\src\adler32.c">
+      <Filter>external\libpng</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\libpng\src\compress.c">
+      <Filter>external\libpng</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\libpng\src\crc32.c">
+      <Filter>external\libpng</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\libpng\src\deflate.c">
+      <Filter>external\libpng</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\libpng\src\gzclose.c">
+      <Filter>external\libpng</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\libpng\src\gzlib.c">
+      <Filter>external\libpng</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\libpng\src\gzread.c">
+      <Filter>external\libpng</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\libpng\src\gzwrite.c">
+      <Filter>external\libpng</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\libpng\src\infback.c">
+      <Filter>external\libpng</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\libpng\src\inffast.c">
+      <Filter>external\libpng</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\libpng\src\inflate.c">
+      <Filter>external\libpng</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\libpng\src\inftrees.c">
+      <Filter>external\libpng</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\libpng\src\png.c">
+      <Filter>external\libpng</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\libpng\src\pngerror.c">
+      <Filter>external\libpng</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\libpng\src\pngget.c">
+      <Filter>external\libpng</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\libpng\src\pngmem.c">
+      <Filter>external\libpng</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\libpng\src\pngpread.c">
+      <Filter>external\libpng</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\libpng\src\pngread.c">
+      <Filter>external\libpng</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\libpng\src\pngrio.c">
+      <Filter>external\libpng</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\libpng\src\pngrtran.c">
+      <Filter>external\libpng</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\libpng\src\pngrutil.c">
+      <Filter>external\libpng</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\libpng\src\pngset.c">
+      <Filter>external\libpng</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\libpng\src\pngtrans.c">
+      <Filter>external\libpng</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\libpng\src\pngwio.c">
+      <Filter>external\libpng</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\libpng\src\pngwrite.c">
+      <Filter>external\libpng</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\libpng\src\pngwtran.c">
+      <Filter>external\libpng</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\libpng\src\pngwutil.c">
+      <Filter>external\libpng</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\libpng\src\trees.c">
+      <Filter>external\libpng</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\libpng\src\uncompr.c">
+      <Filter>external\libpng</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\libpng\src\zutil.c">
+      <Filter>external\libpng</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\theoraplayer\src\OpenAL_AudioInterface.cpp">
+      <Filter>external\theoraplayer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\theoraplayer\src\TheoraAsync.cpp">
+      <Filter>external\theoraplayer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\theoraplayer\src\TheoraAudioInterface.cpp">
+      <Filter>external\theoraplayer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\theoraplayer\src\TheoraAudioPacketQueue.cpp">
+      <Filter>external\theoraplayer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\theoraplayer\src\TheoraDataSource.cpp">
+      <Filter>external\theoraplayer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\theoraplayer\src\TheoraException.cpp">
+      <Filter>external\theoraplayer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\theoraplayer\src\TheoraFrameQueue.cpp">
+      <Filter>external\theoraplayer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\theoraplayer\src\TheoraTimer.cpp">
+      <Filter>external\theoraplayer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\theoraplayer\src\TheoraUtil.cpp">
+      <Filter>external\theoraplayer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\theoraplayer\src\TheoraVideoClip.cpp">
+      <Filter>external\theoraplayer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\theoraplayer\src\TheoraVideoFrame.cpp">
+      <Filter>external\theoraplayer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\theoraplayer\src\TheoraVideoManager.cpp">
+      <Filter>external\theoraplayer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\theoraplayer\src\TheoraWorkerThread.cpp">
+      <Filter>external\theoraplayer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\theoraplayer\src\Theora\TheoraVideoClip_Theora.cpp">
+      <Filter>external\theoraplayer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\theoraplayer\src\YUV\C\yuv_util.c">
+      <Filter>external\theoraplayer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\theoraplayer\src\YUV\C\yuv420_grey_c.c">
+      <Filter>external\theoraplayer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\theoraplayer\src\YUV\C\yuv420_rgb_c.c">
+      <Filter>external\theoraplayer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\theoraplayer\src\YUV\C\yuv420_yuv_c.c">
+      <Filter>external\theoraplayer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\theoraplayer\external\ogg\src\bitwise.c">
+      <Filter>external\theoraplayer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\theoraplayer\external\ogg\src\framing.c">
+      <Filter>external\theoraplayer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\theoraplayer\external\theora\lib\analyze.c">
+      <Filter>external\theoraplayer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\theoraplayer\external\theora\lib\apiwrapper.c">
+      <Filter>external\theoraplayer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\theoraplayer\external\theora\lib\bitpack.c">
+      <Filter>external\theoraplayer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\theoraplayer\external\theora\lib\collect.c">
+      <Filter>external\theoraplayer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\theoraplayer\external\theora\lib\decapiwrapper.c">
+      <Filter>external\theoraplayer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\theoraplayer\external\theora\lib\decinfo.c">
+      <Filter>external\theoraplayer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\theoraplayer\external\theora\lib\decode.c">
+      <Filter>external\theoraplayer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\theoraplayer\external\theora\lib\dequant.c">
+      <Filter>external\theoraplayer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\theoraplayer\external\theora\lib\encapiwrapper.c">
+      <Filter>external\theoraplayer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\theoraplayer\external\theora\lib\encfrag.c">
+      <Filter>external\theoraplayer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\theoraplayer\external\theora\lib\encinfo.c">
+      <Filter>external\theoraplayer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\theoraplayer\external\theora\lib\encode.c">
+      <Filter>external\theoraplayer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\theoraplayer\external\theora\lib\enquant.c">
+      <Filter>external\theoraplayer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\theoraplayer\external\theora\lib\fdct.c">
+      <Filter>external\theoraplayer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\theoraplayer\external\theora\lib\fragment.c">
+      <Filter>external\theoraplayer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\theoraplayer\external\theora\lib\huffdec.c">
+      <Filter>external\theoraplayer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\theoraplayer\external\theora\lib\huffenc.c">
+      <Filter>external\theoraplayer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\theoraplayer\external\theora\lib\idct.c">
+      <Filter>external\theoraplayer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\theoraplayer\external\theora\lib\infot.c">
+      <Filter>external\theoraplayer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\theoraplayer\external\theora\lib\internal.c">
+      <Filter>external\theoraplayer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\theoraplayer\external\theora\lib\mathops.c">
+      <Filter>external\theoraplayer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\theoraplayer\external\theora\lib\mcenc.c">
+      <Filter>external\theoraplayer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\theoraplayer\external\theora\lib\quant.c">
+      <Filter>external\theoraplayer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\theoraplayer\external\theora\lib\rate.c">
+      <Filter>external\theoraplayer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\theoraplayer\external\theora\lib\state.c">
+      <Filter>external\theoraplayer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\theoraplayer\external\theora\lib\tokenize.c">
+      <Filter>external\theoraplayer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\theoraplayer\external\theora\lib\x86_vc\mmxencfrag.c">
+      <Filter>external\theoraplayer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\theoraplayer\external\theora\lib\x86_vc\mmxfdct.c">
+      <Filter>external\theoraplayer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\theoraplayer\external\theora\lib\x86_vc\mmxfrag.c">
+      <Filter>external\theoraplayer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\theoraplayer\external\theora\lib\x86_vc\mmxidct.c">
+      <Filter>external\theoraplayer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\theoraplayer\external\theora\lib\x86_vc\mmxstate.c">
+      <Filter>external\theoraplayer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\theoraplayer\external\theora\lib\x86_vc\x86cpu.c">
+      <Filter>external\theoraplayer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\theoraplayer\external\theora\lib\x86_vc\x86enc.c">
+      <Filter>external\theoraplayer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\theoraplayer\external\theora\lib\x86_vc\x86state.c">
+      <Filter>external\theoraplayer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\theoraplayer\external\vorbis\lib\analysis.c">
+      <Filter>external\theoraplayer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\theoraplayer\external\vorbis\lib\bitrate.c">
+      <Filter>external\theoraplayer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\theoraplayer\external\vorbis\lib\block.c">
+      <Filter>external\theoraplayer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\theoraplayer\external\vorbis\lib\codebook.c">
+      <Filter>external\theoraplayer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\theoraplayer\external\vorbis\lib\envelope.c">
+      <Filter>external\theoraplayer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\theoraplayer\external\vorbis\lib\floor0.c">
+      <Filter>external\theoraplayer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\theoraplayer\external\vorbis\lib\floor1.c">
+      <Filter>external\theoraplayer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\theoraplayer\external\vorbis\lib\info.c">
+      <Filter>external\theoraplayer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\theoraplayer\external\vorbis\lib\lookup.c">
+      <Filter>external\theoraplayer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\theoraplayer\external\vorbis\lib\lpc.c">
+      <Filter>external\theoraplayer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\theoraplayer\external\vorbis\lib\lsp.c">
+      <Filter>external\theoraplayer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\theoraplayer\external\vorbis\lib\mapping0.c">
+      <Filter>external\theoraplayer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\theoraplayer\external\vorbis\lib\mdct.c">
+      <Filter>external\theoraplayer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\theoraplayer\external\vorbis\lib\psy.c">
+      <Filter>external\theoraplayer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\theoraplayer\external\vorbis\lib\registry.c">
+      <Filter>external\theoraplayer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\theoraplayer\external\vorbis\lib\res0.c">
+      <Filter>external\theoraplayer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\theoraplayer\external\vorbis\lib\sharedbook.c">
+      <Filter>external\theoraplayer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\theoraplayer\external\vorbis\lib\smallft.c">
+      <Filter>external\theoraplayer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\theoraplayer\external\vorbis\lib\synthesis.c">
+      <Filter>external\theoraplayer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\theoraplayer\external\vorbis\lib\vorbisenc.c">
+      <Filter>external\theoraplayer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\theoraplayer\external\vorbis\lib\vorbisfile.c">
+      <Filter>external\theoraplayer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\theoraplayer\external\vorbis\lib\window.c">
+      <Filter>external\theoraplayer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\pugixml\src\pugixml.cpp">
+      <Filter>external\pugixml</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\openal\Alc\ALc.c">
+      <Filter>external\openal</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\openal\Alc\alcConfig.c">
+      <Filter>external\openal</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\openal\Alc\alcDedicated.c">
+      <Filter>external\openal</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\openal\Alc\alcEcho.c">
+      <Filter>external\openal</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\openal\Alc\alcModulator.c">
+      <Filter>external\openal</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\openal\Alc\alcReverb.c">
+      <Filter>external\openal</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\openal\Alc\alcRing.c">
+      <Filter>external\openal</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\openal\Alc\alcThread.c">
+      <Filter>external\openal</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\openal\Alc\ALu.c">
+      <Filter>external\openal</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\openal\Alc\bs2b.c">
+      <Filter>external\openal</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\openal\Alc\helpers.c">
+      <Filter>external\openal</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\openal\Alc\hrtf.c">
+      <Filter>external\openal</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\openal\Alc\mixer.c">
+      <Filter>external\openal</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\openal\Alc\mixer_c.c">
+      <Filter>external\openal</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\openal\Alc\mixer_neon.c">
+      <Filter>external\openal</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\openal\Alc\mixer_sse.c">
+      <Filter>external\openal</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\openal\Alc\panning.c">
+      <Filter>external\openal</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\openal\Alc\backends\alsa.c">
+      <Filter>external\openal</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\openal\Alc\backends\coreaudio.c">
+      <Filter>external\openal</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\openal\Alc\backends\dsound.c">
+      <Filter>external\openal</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\openal\Alc\backends\loopback.c">
+      <Filter>external\openal</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\openal\Alc\backends\mmdevapi.c">
+      <Filter>external\openal</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\openal\Alc\backends\null.c">
+      <Filter>external\openal</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\openal\Alc\backends\wave.c">
+      <Filter>external\openal</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\openal\Alc\backends\winmm.c">
+      <Filter>external\openal</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\openal\OpenAL32\alAuxEffectSlot.c">
+      <Filter>external\openal</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\openal\OpenAL32\alBuffer.c">
+      <Filter>external\openal</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\openal\OpenAL32\alEffect.c">
+      <Filter>external\openal</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\openal\OpenAL32\alError.c">
+      <Filter>external\openal</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\openal\OpenAL32\alExtension.c">
+      <Filter>external\openal</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\openal\OpenAL32\alFilter.c">
+      <Filter>external\openal</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\openal\OpenAL32\alListener.c">
+      <Filter>external\openal</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\openal\OpenAL32\alSource.c">
+      <Filter>external\openal</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\openal\OpenAL32\alState.c">
+      <Filter>external\openal</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\openal\OpenAL32\alThunk.c">
+      <Filter>external\openal</Filter>
+    </ClCompile>
+    <ClCompile Include="..\chai3d\src\audio\CAudioBuffer.cpp">
+      <Filter>chai3d\audio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\chai3d\src\audio\CAudioDevice.cpp">
+      <Filter>chai3d\audio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\chai3d\src\audio\CAudioSource.cpp">
+      <Filter>chai3d\audio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\chai3d\src\collisions\CCollisionAABB.cpp">
+      <Filter>chai3d\collisions</Filter>
+    </ClCompile>
+    <ClCompile Include="..\chai3d\src\collisions\CCollisionAABBTree.cpp">
+      <Filter>chai3d\collisions</Filter>
+    </ClCompile>
+    <ClCompile Include="..\chai3d\src\collisions\CCollisionBrute.cpp">
+      <Filter>chai3d\collisions</Filter>
+    </ClCompile>
+    <ClCompile Include="..\chai3d\src\collisions\CGenericCollision.cpp">
+      <Filter>chai3d\collisions</Filter>
+    </ClCompile>
+    <ClCompile Include="..\chai3d\src\devices\CDeltaDevices.cpp">
+      <Filter>chai3d\devices</Filter>
+    </ClCompile>
+    <ClCompile Include="..\chai3d\src\devices\CGenericDevice.cpp">
+      <Filter>chai3d\devices</Filter>
+    </ClCompile>
+    <ClCompile Include="..\chai3d\src\devices\CGenericHapticDevice.cpp">
+      <Filter>chai3d\devices</Filter>
+    </ClCompile>
+    <ClCompile Include="..\chai3d\src\devices\CHapticDeviceHandler.cpp">
+      <Filter>chai3d\devices</Filter>
+    </ClCompile>
+    <ClCompile Include="..\chai3d\src\devices\CLeapDevices.cpp">
+      <Filter>chai3d\devices</Filter>
+    </ClCompile>
+    <ClCompile Include="..\chai3d\src\devices\CMyCustomDevice.cpp">
+      <Filter>chai3d\devices</Filter>
+    </ClCompile>
+    <ClCompile Include="..\chai3d\src\devices\CPhantomDevices.cpp">
+      <Filter>chai3d\devices</Filter>
+    </ClCompile>
+    <ClCompile Include="..\chai3d\src\devices\CSixenseDevices.cpp">
+      <Filter>chai3d\devices</Filter>
+    </ClCompile>
+    <ClCompile Include="..\chai3d\src\display\CCamera.cpp">
+      <Filter>chai3d\display</Filter>
+    </ClCompile>
+    <ClCompile Include="..\chai3d\src\display\CFrameBuffer.cpp">
+      <Filter>chai3d\display</Filter>
+    </ClCompile>
+    <ClCompile Include="..\chai3d\src\effects\CEffectMagnet.cpp">
+      <Filter>chai3d\effects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\chai3d\src\effects\CEffectStickSlip.cpp">
+      <Filter>chai3d\effects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\chai3d\src\effects\CEffectSurface.cpp">
+      <Filter>chai3d\effects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\chai3d\src\effects\CEffectVibration.cpp">
+      <Filter>chai3d\effects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\chai3d\src\effects\CEffectViscosity.cpp">
+      <Filter>chai3d\effects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\chai3d\src\effects\CGenericEffect.cpp">
+      <Filter>chai3d\effects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\chai3d\src\files\CFileAudioWAV.cpp">
+      <Filter>chai3d\files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\chai3d\src\files\CFileImageBMP.cpp">
+      <Filter>chai3d\files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\chai3d\src\files\CFileImageGIF.cpp">
+      <Filter>chai3d\files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\chai3d\src\files\CFileImageJPG.cpp">
+      <Filter>chai3d\files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\chai3d\src\files\CFileImagePNG.cpp">
+      <Filter>chai3d\files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\chai3d\src\files\CFileImagePPM.cpp">
+      <Filter>chai3d\files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\chai3d\src\files\CFileImageRAW.cpp">
+      <Filter>chai3d\files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\chai3d\src\files\CFileModel3DS.cpp">
+      <Filter>chai3d\files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\chai3d\src\files\CFileModelOBJ.cpp">
+      <Filter>chai3d\files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\chai3d\src\files\CFileModelSTL.cpp">
+      <Filter>chai3d\files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\chai3d\src\files\CFileXML.cpp">
+      <Filter>chai3d\files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\chai3d\src\forces\CAlgorithmFingerProxy.cpp">
+      <Filter>chai3d\forces</Filter>
+    </ClCompile>
+    <ClCompile Include="..\chai3d\src\forces\CAlgorithmPotentialField.cpp">
+      <Filter>chai3d\forces</Filter>
+    </ClCompile>
+    <ClCompile Include="..\chai3d\src\forces\CGenericForceAlgorithm.cpp">
+      <Filter>chai3d\forces</Filter>
+    </ClCompile>
+    <ClCompile Include="..\chai3d\src\graphics\CColor.cpp">
+      <Filter>chai3d\graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\chai3d\src\graphics\CDisplayList.cpp">
+      <Filter>chai3d\graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\chai3d\src\graphics\CDraw3D.cpp">
+      <Filter>chai3d\graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\chai3d\src\graphics\CFog.cpp">
+      <Filter>chai3d\graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\chai3d\src\graphics\CFont.cpp">
+      <Filter>chai3d\graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\chai3d\src\graphics\CImage.cpp">
+      <Filter>chai3d\graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\chai3d\src\graphics\CMultiImage.cpp">
+      <Filter>chai3d\graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\chai3d\src\graphics\CPointArray.cpp">
+      <Filter>chai3d\graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\chai3d\src\graphics\CPrimitives.cpp">
+      <Filter>chai3d\graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\chai3d\src\graphics\CSegmentArray.cpp">
+      <Filter>chai3d\graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\chai3d\src\graphics\CTriangleArray.cpp">
+      <Filter>chai3d\graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\chai3d\src\graphics\CVideo.cpp">
+      <Filter>chai3d\graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\chai3d\src\lighting\CDirectionalLight.cpp">
+      <Filter>chai3d\lighting</Filter>
+    </ClCompile>
+    <ClCompile Include="..\chai3d\src\lighting\CGenericLight.cpp">
+      <Filter>chai3d\lighting</Filter>
+    </ClCompile>
+    <ClCompile Include="..\chai3d\src\lighting\CPositionalLight.cpp">
+      <Filter>chai3d\lighting</Filter>
+    </ClCompile>
+    <ClCompile Include="..\chai3d\src\lighting\CShadowMap.cpp">
+      <Filter>chai3d\lighting</Filter>
+    </ClCompile>
+    <ClCompile Include="..\chai3d\src\lighting\CSpotLight.cpp">
+      <Filter>chai3d\lighting</Filter>
+    </ClCompile>
+    <ClCompile Include="..\chai3d\src\materials\CMaterial.cpp">
+      <Filter>chai3d\materials</Filter>
+    </ClCompile>
+    <ClCompile Include="..\chai3d\src\materials\CNormalMap.cpp">
+      <Filter>chai3d\materials</Filter>
+    </ClCompile>
+    <ClCompile Include="..\chai3d\src\materials\CTexture1d.cpp">
+      <Filter>chai3d\materials</Filter>
+    </ClCompile>
+    <ClCompile Include="..\chai3d\src\materials\CTexture2d.cpp">
+      <Filter>chai3d\materials</Filter>
+    </ClCompile>
+    <ClCompile Include="..\chai3d\src\materials\CTexture3d.cpp">
+      <Filter>chai3d\materials</Filter>
+    </ClCompile>
+    <ClCompile Include="..\chai3d\src\materials\CTextureVideo.cpp">
+      <Filter>chai3d\materials</Filter>
+    </ClCompile>
+    <ClCompile Include="..\chai3d\src\world\CGenericObject.cpp">
+      <Filter>chai3d\world</Filter>
+    </ClCompile>
+    <ClCompile Include="..\chai3d\src\world\CMesh.cpp">
+      <Filter>chai3d\world</Filter>
+    </ClCompile>
+    <ClCompile Include="..\chai3d\src\world\CMultiMesh.cpp">
+      <Filter>chai3d\world</Filter>
+    </ClCompile>
+    <ClCompile Include="..\chai3d\src\world\CMultiPoint.cpp">
+      <Filter>chai3d\world</Filter>
+    </ClCompile>
+    <ClCompile Include="..\chai3d\src\world\CMultiSegment.cpp">
+      <Filter>chai3d\world</Filter>
+    </ClCompile>
+    <ClCompile Include="..\chai3d\src\world\CShapeBox.cpp">
+      <Filter>chai3d\world</Filter>
+    </ClCompile>
+    <ClCompile Include="..\chai3d\src\world\CShapeCylinder.cpp">
+      <Filter>chai3d\world</Filter>
+    </ClCompile>
+    <ClCompile Include="..\chai3d\src\world\CShapeEllipsoid.cpp">
+      <Filter>chai3d\world</Filter>
+    </ClCompile>
+    <ClCompile Include="..\chai3d\src\world\CShapeLine.cpp">
+      <Filter>chai3d\world</Filter>
+    </ClCompile>
+    <ClCompile Include="..\chai3d\src\world\CShapeSphere.cpp">
+      <Filter>chai3d\world</Filter>
+    </ClCompile>
+    <ClCompile Include="..\chai3d\src\world\CShapeTorus.cpp">
+      <Filter>chai3d\world</Filter>
+    </ClCompile>
+    <ClCompile Include="..\chai3d\src\world\CVoxelObject.cpp">
+      <Filter>chai3d\world</Filter>
+    </ClCompile>
+    <ClCompile Include="..\chai3d\src\world\CWorld.cpp">
+      <Filter>chai3d\world</Filter>
+    </ClCompile>
+    <ClCompile Include="..\chai3d\src\widgets\CBackground.cpp">
+      <Filter>chai3d\widgets</Filter>
+    </ClCompile>
+    <ClCompile Include="..\chai3d\src\widgets\CBitmap.cpp">
+      <Filter>chai3d\widgets</Filter>
+    </ClCompile>
+    <ClCompile Include="..\chai3d\src\widgets\CDial.cpp">
+      <Filter>chai3d\widgets</Filter>
+    </ClCompile>
+    <ClCompile Include="..\chai3d\src\widgets\CGenericWidget.cpp">
+      <Filter>chai3d\widgets</Filter>
+    </ClCompile>
+    <ClCompile Include="..\chai3d\src\widgets\CLabel.cpp">
+      <Filter>chai3d\widgets</Filter>
+    </ClCompile>
+    <ClCompile Include="..\chai3d\src\widgets\CLevel.cpp">
+      <Filter>chai3d\widgets</Filter>
+    </ClCompile>
+    <ClCompile Include="..\chai3d\src\widgets\CPanel.cpp">
+      <Filter>chai3d\widgets</Filter>
+    </ClCompile>
+    <ClCompile Include="..\chai3d\src\widgets\CScope.cpp">
+      <Filter>chai3d\widgets</Filter>
+    </ClCompile>
+    <ClCompile Include="..\chai3d\src\widgets\CViewPanel.cpp">
+      <Filter>chai3d\widgets</Filter>
+    </ClCompile>
+    <ClCompile Include="..\chai3d\src\tools\CGenericTool.cpp">
+      <Filter>chai3d\tools</Filter>
+    </ClCompile>
+    <ClCompile Include="..\chai3d\src\tools\CHapticPoint.cpp">
+      <Filter>chai3d\tools</Filter>
+    </ClCompile>
+    <ClCompile Include="..\chai3d\src\tools\CToolCursor.cpp">
+      <Filter>chai3d\tools</Filter>
+    </ClCompile>
+    <ClCompile Include="..\chai3d\src\tools\CToolGripper.cpp">
+      <Filter>chai3d\tools</Filter>
+    </ClCompile>
+    <ClCompile Include="..\chai3d\src\timers\CFrequencyCounter.cpp">
+      <Filter>chai3d\timers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\chai3d\src\timers\CPrecisionClock.cpp">
+      <Filter>chai3d\timers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\chai3d\src\system\CGlobals.cpp">
+      <Filter>chai3d\system</Filter>
+    </ClCompile>
+    <ClCompile Include="..\chai3d\src\system\CMutex.cpp">
+      <Filter>chai3d\system</Filter>
+    </ClCompile>
+    <ClCompile Include="..\chai3d\src\system\CString.cpp">
+      <Filter>chai3d\system</Filter>
+    </ClCompile>
+    <ClCompile Include="..\chai3d\src\system\CThread.cpp">
+      <Filter>chai3d\system</Filter>
+    </ClCompile>
+    <ClCompile Include="..\chai3d\src\shaders\CShader.cpp">
+      <Filter>chai3d\shaders</Filter>
+    </ClCompile>
+    <ClCompile Include="..\chai3d\src\shaders\CShaderProgram.cpp">
+      <Filter>chai3d\shaders</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\GLAD\include\glad\glad.h">
+      <Filter>GLAD</Filter>
+    </ClInclude>
+    <ClInclude Include="..\GLAD\include\KHR\khrplatform.h">
+      <Filter>GLAD</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysModel.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="WindowYH.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Model.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
     <ClInclude Include="Program.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="ShaderYH.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="Vertex.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="Window.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\SOIL2\src\common\common.hpp">
-      <Filter>SOIL2</Filter>
-    </ClInclude>
-    <ClInclude Include="..\SOIL2\src\SOIL2\etc1_utils.h">
-      <Filter>SOIL2</Filter>
-    </ClInclude>
-    <ClInclude Include="..\SOIL2\src\SOIL2\image_DXT.h">
-      <Filter>SOIL2</Filter>
-    </ClInclude>
-    <ClInclude Include="..\SOIL2\src\SOIL2\image_helper.h">
-      <Filter>SOIL2</Filter>
-    </ClInclude>
-    <ClInclude Include="..\SOIL2\src\SOIL2\jo_jpeg.h">
-      <Filter>SOIL2</Filter>
-    </ClInclude>
-    <ClInclude Include="..\SOIL2\src\SOIL2\pkm_helper.h">
-      <Filter>SOIL2</Filter>
-    </ClInclude>
-    <ClInclude Include="..\SOIL2\src\SOIL2\pvr_helper.h">
-      <Filter>SOIL2</Filter>
-    </ClInclude>
-    <ClInclude Include="..\SOIL2\src\SOIL2\SOIL2.h">
-      <Filter>SOIL2</Filter>
-    </ClInclude>
-    <ClInclude Include="..\SOIL2\src\SOIL2\stb_image.h">
-      <Filter>SOIL2</Filter>
-    </ClInclude>
-    <ClInclude Include="..\SOIL2\src\SOIL2\stb_image_write.h">
-      <Filter>SOIL2</Filter>
-    </ClInclude>
-    <ClInclude Include="..\SOIL2\src\SOIL2\stbi_DDS.h">
-      <Filter>SOIL2</Filter>
-    </ClInclude>
-    <ClInclude Include="..\SOIL2\src\SOIL2\stbi_DDS_c.h">
-      <Filter>SOIL2</Filter>
-    </ClInclude>
-    <ClInclude Include="..\SOIL2\src\SOIL2\stbi_ext.h">
-      <Filter>SOIL2</Filter>
-    </ClInclude>
-    <ClInclude Include="..\SOIL2\src\SOIL2\stbi_ext_c.h">
-      <Filter>SOIL2</Filter>
-    </ClInclude>
-    <ClInclude Include="..\SOIL2\src\SOIL2\stbi_pkm.h">
-      <Filter>SOIL2</Filter>
-    </ClInclude>
-    <ClInclude Include="..\SOIL2\src\SOIL2\stbi_pkm_c.h">
-      <Filter>SOIL2</Filter>
-    </ClInclude>
-    <ClInclude Include="..\SOIL2\src\SOIL2\stbi_pvr.h">
-      <Filter>SOIL2</Filter>
-    </ClInclude>
-    <ClInclude Include="..\SOIL2\src\SOIL2\stbi_pvr_c.h">
-      <Filter>SOIL2</Filter>
-    </ClInclude>
     <ClInclude Include="Utilities.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="Model.h">
+    <ClInclude Include="..\external\theoraplayer\external\theora\lib\decint.h">
+      <Filter>external\theoraplayer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\external\pugixml\include\pugiconfig.hpp">
+      <Filter>external\pugixml</Filter>
+    </ClInclude>
+    <ClInclude Include="..\external\pugixml\include\pugixml.hpp">
+      <Filter>external\pugixml</Filter>
+    </ClInclude>
+    <ClInclude Include="..\chai3d\src\audio\CAudioBuffer.h">
+      <Filter>chai3d\audio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\chai3d\src\audio\CAudioDevice.h">
+      <Filter>chai3d\audio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\chai3d\src\audio\CAudioSource.h">
+      <Filter>chai3d\audio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\chai3d\src\collisions\CCollisionAABB.h">
+      <Filter>chai3d\collisions</Filter>
+    </ClInclude>
+    <ClInclude Include="..\chai3d\src\collisions\CCollisionAABBBox.h">
+      <Filter>chai3d\collisions</Filter>
+    </ClInclude>
+    <ClInclude Include="..\chai3d\src\collisions\CCollisionAABBTree.h">
+      <Filter>chai3d\collisions</Filter>
+    </ClInclude>
+    <ClInclude Include="..\chai3d\src\collisions\CCollisionBasics.h">
+      <Filter>chai3d\collisions</Filter>
+    </ClInclude>
+    <ClInclude Include="..\chai3d\src\collisions\CCollisionBrute.h">
+      <Filter>chai3d\collisions</Filter>
+    </ClInclude>
+    <ClInclude Include="..\chai3d\src\collisions\CGenericCollision.h">
+      <Filter>chai3d\collisions</Filter>
+    </ClInclude>
+    <ClInclude Include="..\chai3d\src\devices\CDeltaDevices.h">
+      <Filter>chai3d\devices</Filter>
+    </ClInclude>
+    <ClInclude Include="..\chai3d\src\devices\CGenericDevice.h">
+      <Filter>chai3d\devices</Filter>
+    </ClInclude>
+    <ClInclude Include="..\chai3d\src\devices\CGenericHapticDevice.h">
+      <Filter>chai3d\devices</Filter>
+    </ClInclude>
+    <ClInclude Include="..\chai3d\src\devices\CHapticDeviceHandler.h">
+      <Filter>chai3d\devices</Filter>
+    </ClInclude>
+    <ClInclude Include="..\chai3d\src\devices\CLeapDevices.h">
+      <Filter>chai3d\devices</Filter>
+    </ClInclude>
+    <ClInclude Include="..\chai3d\src\devices\CMyCustomDevice.h">
+      <Filter>chai3d\devices</Filter>
+    </ClInclude>
+    <ClInclude Include="..\chai3d\src\devices\CPhantomDevices.h">
+      <Filter>chai3d\devices</Filter>
+    </ClInclude>
+    <ClInclude Include="..\chai3d\src\devices\CSixenseDevices.h">
+      <Filter>chai3d\devices</Filter>
+    </ClInclude>
+    <ClInclude Include="..\chai3d\src\display\CCamera.h">
+      <Filter>chai3d\display</Filter>
+    </ClInclude>
+    <ClInclude Include="..\chai3d\src\display\CFrameBuffer.h">
+      <Filter>chai3d\display</Filter>
+    </ClInclude>
+    <ClInclude Include="..\chai3d\src\effects\CEffectMagnet.h">
+      <Filter>chai3d\effects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\chai3d\src\effects\CEffectStickSlip.h">
+      <Filter>chai3d\effects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\chai3d\src\effects\CEffectSurface.h">
+      <Filter>chai3d\effects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\chai3d\src\effects\CEffectVibration.h">
+      <Filter>chai3d\effects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\chai3d\src\effects\CEffectViscosity.h">
+      <Filter>chai3d\effects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\chai3d\src\effects\CGenericEffect.h">
+      <Filter>chai3d\effects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\chai3d\src\files\CFileAudioWAV.h">
+      <Filter>chai3d\files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\chai3d\src\files\CFileImageBMP.h">
+      <Filter>chai3d\files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\chai3d\src\files\CFileImageGIF.h">
+      <Filter>chai3d\files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\chai3d\src\files\CFileImageJPG.h">
+      <Filter>chai3d\files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\chai3d\src\files\CFileImagePNG.h">
+      <Filter>chai3d\files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\chai3d\src\files\CFileImagePPM.h">
+      <Filter>chai3d\files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\chai3d\src\files\CFileImageRAW.h">
+      <Filter>chai3d\files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\chai3d\src\files\CFileModel3DS.h">
+      <Filter>chai3d\files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\chai3d\src\files\CFileModelOBJ.h">
+      <Filter>chai3d\files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\chai3d\src\files\CFileModelSTL.h">
+      <Filter>chai3d\files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\chai3d\src\files\CFileXML.h">
+      <Filter>chai3d\files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\chai3d\src\forces\CAlgorithmFingerProxy.h">
+      <Filter>chai3d\forces</Filter>
+    </ClInclude>
+    <ClInclude Include="..\chai3d\src\forces\CAlgorithmPotentialField.h">
+      <Filter>chai3d\forces</Filter>
+    </ClInclude>
+    <ClInclude Include="..\chai3d\src\forces\CGenericForceAlgorithm.h">
+      <Filter>chai3d\forces</Filter>
+    </ClInclude>
+    <ClInclude Include="..\chai3d\src\forces\CInteractionBasics.h">
+      <Filter>chai3d\forces</Filter>
+    </ClInclude>
+    <ClInclude Include="..\chai3d\src\graphics\CColor.h">
+      <Filter>chai3d\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\chai3d\src\graphics\CDisplayList.h">
+      <Filter>chai3d\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\chai3d\src\graphics\CDraw3D.h">
+      <Filter>chai3d\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\chai3d\src\graphics\CFog.h">
+      <Filter>chai3d\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\chai3d\src\graphics\CFont.h">
+      <Filter>chai3d\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\chai3d\src\graphics\CGenericArray.h">
+      <Filter>chai3d\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\chai3d\src\graphics\CImage.h">
+      <Filter>chai3d\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\chai3d\src\graphics\CMultiImage.h">
+      <Filter>chai3d\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\chai3d\src\graphics\COpenGLHeaders.h">
+      <Filter>chai3d\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\chai3d\src\graphics\CPointArray.h">
+      <Filter>chai3d\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\chai3d\src\graphics\CPrimitives.h">
+      <Filter>chai3d\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\chai3d\src\graphics\CRenderOptions.h">
+      <Filter>chai3d\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\chai3d\src\graphics\CSegmentArray.h">
+      <Filter>chai3d\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\chai3d\src\graphics\CTriangleArray.h">
+      <Filter>chai3d\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\chai3d\src\graphics\CVertexArray.h">
+      <Filter>chai3d\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\chai3d\src\graphics\CVideo.h">
+      <Filter>chai3d\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\chai3d\src\lighting\CDirectionalLight.h">
+      <Filter>chai3d\lighting</Filter>
+    </ClInclude>
+    <ClInclude Include="..\chai3d\src\lighting\CGenericLight.h">
+      <Filter>chai3d\lighting</Filter>
+    </ClInclude>
+    <ClInclude Include="..\chai3d\src\lighting\CPositionalLight.h">
+      <Filter>chai3d\lighting</Filter>
+    </ClInclude>
+    <ClInclude Include="..\chai3d\src\lighting\CShadowMap.h">
+      <Filter>chai3d\lighting</Filter>
+    </ClInclude>
+    <ClInclude Include="..\chai3d\src\lighting\CSpotLight.h">
+      <Filter>chai3d\lighting</Filter>
+    </ClInclude>
+    <ClInclude Include="..\chai3d\src\materials\CGenericTexture.h">
+      <Filter>chai3d\materials</Filter>
+    </ClInclude>
+    <ClInclude Include="..\chai3d\src\materials\CMaterial.h">
+      <Filter>chai3d\materials</Filter>
+    </ClInclude>
+    <ClInclude Include="..\chai3d\src\materials\CNormalMap.h">
+      <Filter>chai3d\materials</Filter>
+    </ClInclude>
+    <ClInclude Include="..\chai3d\src\materials\CTexture1d.h">
+      <Filter>chai3d\materials</Filter>
+    </ClInclude>
+    <ClInclude Include="..\chai3d\src\materials\CTexture2d.h">
+      <Filter>chai3d\materials</Filter>
+    </ClInclude>
+    <ClInclude Include="..\chai3d\src\materials\CTexture3d.h">
+      <Filter>chai3d\materials</Filter>
+    </ClInclude>
+    <ClInclude Include="..\chai3d\src\materials\CTextureVideo.h">
+      <Filter>chai3d\materials</Filter>
+    </ClInclude>
+    <ClInclude Include="..\chai3d\src\math\CBezier.h">
+      <Filter>chai3d\math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\chai3d\src\math\CConstants.h">
+      <Filter>chai3d\math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\chai3d\src\math\CGeometry.h">
+      <Filter>chai3d\math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\chai3d\src\math\CMarchingCubes.h">
+      <Filter>chai3d\math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\chai3d\src\math\CMaths.h">
+      <Filter>chai3d\math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\chai3d\src\math\CMatrix3d.h">
+      <Filter>chai3d\math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\chai3d\src\math\CPolySolver.h">
+      <Filter>chai3d\math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\chai3d\src\math\CQuaternion.h">
+      <Filter>chai3d\math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\chai3d\src\math\CTransform.h">
+      <Filter>chai3d\math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\chai3d\src\math\CVector3d.h">
+      <Filter>chai3d\math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\chai3d\src\world\CGenericObject.h">
+      <Filter>chai3d\world</Filter>
+    </ClInclude>
+    <ClInclude Include="..\chai3d\src\world\CMesh.h">
+      <Filter>chai3d\world</Filter>
+    </ClInclude>
+    <ClInclude Include="..\chai3d\src\world\CMultiMesh.h">
+      <Filter>chai3d\world</Filter>
+    </ClInclude>
+    <ClInclude Include="..\chai3d\src\world\CMultiPoint.h">
+      <Filter>chai3d\world</Filter>
+    </ClInclude>
+    <ClInclude Include="..\chai3d\src\world\CMultiSegment.h">
+      <Filter>chai3d\world</Filter>
+    </ClInclude>
+    <ClInclude Include="..\chai3d\src\world\CShapeBox.h">
+      <Filter>chai3d\world</Filter>
+    </ClInclude>
+    <ClInclude Include="..\chai3d\src\world\CShapeCylinder.h">
+      <Filter>chai3d\world</Filter>
+    </ClInclude>
+    <ClInclude Include="..\chai3d\src\world\CShapeEllipsoid.h">
+      <Filter>chai3d\world</Filter>
+    </ClInclude>
+    <ClInclude Include="..\chai3d\src\world\CShapeLine.h">
+      <Filter>chai3d\world</Filter>
+    </ClInclude>
+    <ClInclude Include="..\chai3d\src\world\CShapeSphere.h">
+      <Filter>chai3d\world</Filter>
+    </ClInclude>
+    <ClInclude Include="..\chai3d\src\world\CShapeTorus.h">
+      <Filter>chai3d\world</Filter>
+    </ClInclude>
+    <ClInclude Include="..\chai3d\src\world\CVoxelObject.h">
+      <Filter>chai3d\world</Filter>
+    </ClInclude>
+    <ClInclude Include="..\chai3d\src\world\CWorld.h">
+      <Filter>chai3d\world</Filter>
+    </ClInclude>
+    <ClInclude Include="..\chai3d\src\widgets\CBackground.h">
+      <Filter>chai3d\widgets</Filter>
+    </ClInclude>
+    <ClInclude Include="..\chai3d\src\widgets\CBitmap.h">
+      <Filter>chai3d\widgets</Filter>
+    </ClInclude>
+    <ClInclude Include="..\chai3d\src\widgets\CDial.h">
+      <Filter>chai3d\widgets</Filter>
+    </ClInclude>
+    <ClInclude Include="..\chai3d\src\widgets\CGenericWidget.h">
+      <Filter>chai3d\widgets</Filter>
+    </ClInclude>
+    <ClInclude Include="..\chai3d\src\widgets\CLabel.h">
+      <Filter>chai3d\widgets</Filter>
+    </ClInclude>
+    <ClInclude Include="..\chai3d\src\widgets\CLevel.h">
+      <Filter>chai3d\widgets</Filter>
+    </ClInclude>
+    <ClInclude Include="..\chai3d\src\widgets\CPanel.h">
+      <Filter>chai3d\widgets</Filter>
+    </ClInclude>
+    <ClInclude Include="..\chai3d\src\widgets\CScope.h">
+      <Filter>chai3d\widgets</Filter>
+    </ClInclude>
+    <ClInclude Include="..\chai3d\src\widgets\CViewPanel.h">
+      <Filter>chai3d\widgets</Filter>
+    </ClInclude>
+    <ClInclude Include="..\chai3d\src\tools\CGenericTool.h">
+      <Filter>chai3d\tools</Filter>
+    </ClInclude>
+    <ClInclude Include="..\chai3d\src\tools\CHapticPoint.h">
+      <Filter>chai3d\tools</Filter>
+    </ClInclude>
+    <ClInclude Include="..\chai3d\src\tools\CToolCursor.h">
+      <Filter>chai3d\tools</Filter>
+    </ClInclude>
+    <ClInclude Include="..\chai3d\src\tools\CToolGripper.h">
+      <Filter>chai3d\tools</Filter>
+    </ClInclude>
+    <ClInclude Include="..\chai3d\src\timers\CFrequencyCounter.h">
+      <Filter>chai3d\timers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\chai3d\src\timers\CPrecisionClock.h">
+      <Filter>chai3d\timers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\chai3d\src\system\CGenericType.h">
+      <Filter>chai3d\system</Filter>
+    </ClInclude>
+    <ClInclude Include="..\chai3d\src\system\CGlobals.h">
+      <Filter>chai3d\system</Filter>
+    </ClInclude>
+    <ClInclude Include="..\chai3d\src\system\CMutex.h">
+      <Filter>chai3d\system</Filter>
+    </ClInclude>
+    <ClInclude Include="..\chai3d\src\system\CString.h">
+      <Filter>chai3d\system</Filter>
+    </ClInclude>
+    <ClInclude Include="..\chai3d\src\system\CThread.h">
+      <Filter>chai3d\system</Filter>
+    </ClInclude>
+    <ClInclude Include="..\chai3d\src\shaders\CShader.h">
+      <Filter>chai3d\shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="..\chai3d\src\shaders\CShaderProgram.h">
+      <Filter>chai3d\shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="..\chai3d\src\resources\CChai3dLogo.h">
+      <Filter>chai3d\resources</Filter>
+    </ClInclude>
+    <ClInclude Include="..\chai3d\src\resources\CFontCalibri16.h">
+      <Filter>chai3d\resources</Filter>
+    </ClInclude>
+    <ClInclude Include="..\chai3d\src\resources\CFontCalibri18.h">
+      <Filter>chai3d\resources</Filter>
+    </ClInclude>
+    <ClInclude Include="..\chai3d\src\resources\CFontCalibri20.h">
+      <Filter>chai3d\resources</Filter>
+    </ClInclude>
+    <ClInclude Include="..\chai3d\src\resources\CFontCalibri22.h">
+      <Filter>chai3d\resources</Filter>
+    </ClInclude>
+    <ClInclude Include="..\chai3d\src\resources\CFontCalibri24.h">
+      <Filter>chai3d\resources</Filter>
+    </ClInclude>
+    <ClInclude Include="..\chai3d\src\resources\CFontCalibri26.h">
+      <Filter>chai3d\resources</Filter>
+    </ClInclude>
+    <ClInclude Include="..\chai3d\src\resources\CFontCalibri28.h">
+      <Filter>chai3d\resources</Filter>
+    </ClInclude>
+    <ClInclude Include="..\chai3d\src\resources\CFontCalibri32.h">
+      <Filter>chai3d\resources</Filter>
+    </ClInclude>
+    <ClInclude Include="..\chai3d\src\resources\CFontCalibri36.h">
+      <Filter>chai3d\resources</Filter>
+    </ClInclude>
+    <ClInclude Include="..\chai3d\src\resources\CFontCalibri40.h">
+      <Filter>chai3d\resources</Filter>
+    </ClInclude>
+    <ClInclude Include="..\chai3d\src\resources\CFontCalibri72.h">
+      <Filter>chai3d\resources</Filter>
+    </ClInclude>
+    <ClInclude Include="..\chai3d\src\resources\CFontCalibri144.h">
+      <Filter>chai3d\resources</Filter>
+    </ClInclude>
+    <ClInclude Include="..\chai3d\src\resources\CShaderBasicVoxel-LUT8.h">
+      <Filter>chai3d\resources</Filter>
+    </ClInclude>
+    <ClInclude Include="..\chai3d\src\resources\CShaderBasicVoxel-RGBA8.h">
+      <Filter>chai3d\resources</Filter>
+    </ClInclude>
+    <ClInclude Include="..\chai3d\src\resources\CShaderDVR-LUT8.h">
+      <Filter>chai3d\resources</Filter>
+    </ClInclude>
+    <ClInclude Include="..\chai3d\src\resources\CShaderFong.h">
+      <Filter>chai3d\resources</Filter>
+    </ClInclude>
+    <ClInclude Include="..\chai3d\src\resources\CShaderIsosurfaceColor-L8.h">
+      <Filter>chai3d\resources</Filter>
+    </ClInclude>
+    <ClInclude Include="..\chai3d\src\resources\CShaderIsosurfaceColor-LUT8.h">
+      <Filter>chai3d\resources</Filter>
+    </ClInclude>
+    <ClInclude Include="..\chai3d\src\resources\CShaderIsosurfaceColor-RGBA8.h">
+      <Filter>chai3d\resources</Filter>
+    </ClInclude>
+    <ClInclude Include="..\chai3d\src\resources\CShaderIsosurface-L8.h">
+      <Filter>chai3d\resources</Filter>
+    </ClInclude>
+    <ClInclude Include="..\chai3d\src\resources\CShaderIsosurface-RGBA8.h">
+      <Filter>chai3d\resources</Filter>
+    </ClInclude>
+    <ClInclude Include="..\chai3d\src\chai3d.h">
+      <Filter>chai3d</Filter>
+    </ClInclude>
+    <ClInclude Include="Deformation.cuh">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="PhysModel.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="Haptic.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CudaCompile Include="Deformation.cu">
+      <Filter>源文件</Filter>
+    </CudaCompile>
   </ItemGroup>
 </Project>
