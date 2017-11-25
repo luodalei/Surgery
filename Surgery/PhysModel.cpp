@@ -4,49 +4,20 @@
 #include "collisions/CCollisionAABB.h"
 #include "shaders/CShaderProgram.h"
 
+#include <vector_functions.hpp>
+
 #include <iostream>
+#include <algorithm>
 #include <fstream>
 #include <string>
 
+#include <thrust\sort.h>
+#include <thrust/execution_policy.h>
+
 #include "GL/glu.h"
 
-//四种状态粒子初始质量
-double PhysConstant::SOLID_1_Mass;
-double PhysConstant::SOLID_2_Mass;
-double PhysConstant::LIQUID_Mass;
-double PhysConstant::GAS_Mass;
 
-double PhysConstant::Solid_Density;
-double PhysConstant::Liquid_Density;
-double PhysConstant::Gas_Density;
-
-double PhysConstant::Air_Temperature;
-
-double PhysConstant::Split_Temperature; //SOLID_1 -> SOLID_2
-double PhysConstant::Fusion_Temperature;//SOLID_2 -> LIQUID
-double PhysConstant::Boil_Temperature; //LIQUID -> GAS
-double PhysConstant::LatentHeat_Solid2Liquid;//SOLID_2 -> LIQUID
-double PhysConstant::LatentHeat_Liquid2Gas;
-
-double PhysConstant::Thermal_Conductivity; //h: Qi=h(Tair - Ti)*A
-double PhysConstant::Thermal_Diffusion; //Cd： in heat transfer between particle
-double PhysConstant::Heat_Capacity_Solid; //C: delta_T=Qi/C*m
-double PhysConstant::Heat_Capacity_Liquid;
-double PhysConstant::Heat_Capacity_Gas;
-
-//光子参数
-double PhysConstant::Emissivity;
-double PhysConstant::Boltzmann_Constant;
-double PhysConstant::Source_Temperature;
-double PhysConstant::Source_Area;
-int PhysConstant::PhotonsNum_TimeStep;//单位时间射出的光子数
-
-//各种半径参数
-double PhysConstant::Solid_1_EffectiveRadius; //re
-double PhysConstant::Solid_2_EffectiveRadius;
-
-
-PhysModel::PhysModel()
+PhysModel::PhysModel(std::string filename)
 {
 	// create vertex array, only use color data!
 	vertices = cVertexArray::create(false, false, true, false, false, false);
@@ -77,12 +48,149 @@ PhysModel::PhysModel()
 
 	//cuda
 	isRegisterBuffer = false;
+
+	//need find neighbors
+	needUpdateNeighbors = true;
+
+	//------------------------------------
+	//Physical init
+	//------------------------------------
+	//Load point cloud
+	LoadFromASC(filename);
+
+	//find extreme particle pos
+	FindExtremePoint();
+
+	//particles count
+	numParticles = vertices->m_localPos.size();
+
+	//every particle has neighbors(26 * particles count)
+	hNeighbors.resize(26 * numParticles, -1);
+	hNeighborCount.resize(numParticles, 0);
+
+	//Init hPos & hVel & hPredictPos
+	double3 zero = make_double3(0, 0, 0);
+	hPos.resize(numParticles, zero);
+	hVel.resize(numParticles, zero);
+	hPredictPos.resize(numParticles, zero);
+
+	//Init hGridParticle Index & hash
+	hGridParticleHash.resize(numParticles, 0);
+	hGridParticleIndex.resize(numParticles, 0);
+
+	//init hSortedPos & vel
+	hSortedPos.resize(numParticles);
+	hSortedVel.resize(numParticles);
+
+	//Init hNearbyIndex & hNearbyCount
+	hNearbyIdx.resize(2000, -1);
+	hNearbyCount = 0;
+
+	//Init hInvMass
+	hInvMass.resize(numParticles, 1.0);
+
+	//phys param setting
+	physParam.Solid_1_EffectiveRadius = 0.06;
+
+	physParam.gridSize.x = physParam.gridSize.y = physParam.gridSize.z = 64;
+	physParam.numCells = physParam.gridSize.x * physParam.gridSize.y * physParam.gridSize.z;
+
+	//init cellstart & end
+	hCellStart.resize(physParam.numCells, -1);
+	hCellEnd.resize(physParam.numCells, -1);
+
+	double cellSize = physParam.Solid_1_EffectiveRadius * 2;
+	physParam.cellSize = make_double3(cellSize, cellSize, cellSize);
+	
+	physParam.numBodies = numParticles;
+	physParam.worldOrigin = make_double3(extremePoint_xMinus.x(), extremePoint_yMinus.y(), extremePoint_zMinus.z());
+
+	//copy velocity to GPU
+	AllocateArray((void**)&dVel, sizeof(double3) * hVel.size());
+	CopyArrayToDevice(dVel, hVel.data(), 0, sizeof(double3) * hVel.size());
+
+	//copy neighbors to GPU
+	AllocateArray((void**)&dNeighbors, sizeof(int) * hNeighbors.size());
+	CopyArrayToDevice(dNeighbors, hNeighbors.data(), 0, sizeof(int) * hNeighbors.size());
+
+	//copy neighbor count to GPU
+	AllocateArray((void**)&dNeighborCount, sizeof(uint) * hNeighborCount.size());
+	CopyArrayToDevice(dNeighborCount, hNeighborCount.data(), 0, sizeof(uint) * hNeighborCount.size());
+
+	//Allocate memsize for grid particle hash
+	AllocateArray((void**)&dGridParticleHash, numParticles * sizeof(uint));
+
+	//Allocate memsize for grid particle index
+	AllocateArray((void**)&dGridParticleIndex, numParticles * sizeof(uint));
+
+	//Allocate memsize for sorted pos & vel
+	AllocateArray((void**)&dSortedPos, numParticles * sizeof(double3));
+	AllocateArray((void**)&dSortedVel, numParticles * sizeof(double3));
+
+	//Allocate memsize for cell start & end
+	AllocateArray((void**)&dCellStart, physParam.numCells * sizeof(uint));
+	AllocateArray((void**)&dCellEnd, physParam.numCells * sizeof(uint));
+
+	//Allocate memsize for near tool particles indices
+	AllocateArray((void**)&dNearbyIdx, sizeof(int) * hNearbyIdx.size());
+	CopyArrayToDevice(dNearbyIdx, hNearbyIdx.data(), 0, sizeof(int) * hNearbyIdx.size());
+
+	//Allocate memsize for near tool particles count
+	AllocateArray((void**)&dNearbyCount, sizeof(uint));
+	CopyArrayToDevice(dNearbyCount, &hNearbyCount, 0, sizeof(uint));
+
+	//Allocate memsize for predict pos
+	AllocateArray((void**)&dPredictPos, hPredictPos.size() * sizeof(double3));
+	CopyArrayToDevice(dPredictPos, hPredictPos.data(), 0, sizeof(double3) * hPredictPos.size());
+
+	//Allocate memsize for dInvMass
+	AllocateArray((void**)&dInvMass, hInvMass.size() * sizeof(double));
+	CopyArrayToDevice(dInvMass, hInvMass.data(), 0, sizeof(double) * hInvMass.size());
+
+	//copy physParam to GPU
+	SetParameters(&physParam);
 }
 
 
 PhysModel::~PhysModel()
 {
 	m_displayList.invalidate();
+
+	FreeMemory();
+}
+
+//释放与物理属性、cuda相关内存
+void PhysModel::FreeMemory()
+{
+	hPos.clear();
+	hVel.clear();
+	hNeighbors.clear();
+	hNeighborCount.clear();
+	hSortedPos.clear();
+	hSortedVel.clear();
+	hGridParticleHash.clear();
+	hGridParticleIndex.clear();
+	hCellStart.clear();
+	hCellEnd.clear();
+	hPredictPos.clear();
+	hInvMass.clear();
+	hNearbyIdx.clear();
+
+	FreeArray(dVel);
+	FreeArray(dSortedPos);
+	FreeArray(dSortedVel);
+	FreeArray(dCellStart);
+	FreeArray(dCellEnd);
+	FreeArray(dGridParticleIndex);
+	FreeArray(dGridParticleHash);
+
+	FreeArray(dNearbyIdx);
+	FreeArray(dNearbyCount);
+
+	FreeArray(dPredictPos);
+	FreeArray(dInvMass);
+
+	UnRegisterGLBufferObject(vertsPos_resource);
 }
 
 bool PhysModel::LoadFromASC(std::string filename)
@@ -590,7 +698,6 @@ void PhysModel::renderPoints(cRenderOptions& a_options)
 		if (!isRegisterBuffer)
 		{
 			RegisterCudaBuffer(&vertsPos_resource, vertices->m_positionBuffer);
-			OutputVertsPos();
 
 			isRegisterBuffer = true;
 		}
@@ -803,4 +910,322 @@ bool ReadASC(const char *filename, cVertexArrayPtr _vertices, int &pointCount)
 	dataFile.close();
 
 	return true;
+}
+
+//------------------------------------------------------------------------------
+// CUDA releated:
+//------------------------------------------------------------------------------
+void PhysModel::FindExtremePoint()
+{
+	extremePoint_xMinus = cVector3d(FLT_MAX, 0, 0);
+	extremePoint_xPlus = cVector3d(-FLT_MAX, 0, 0);
+	extremePoint_yMinus = cVector3d(0, FLT_MAX, 0);
+	extremePoint_yPlus = cVector3d(0, -FLT_MAX, 0);
+	extremePoint_zMinus = cVector3d(0, 0, FLT_MAX);
+	extremePoint_zPlus = cVector3d(0, 0, -FLT_MAX);
+
+	int pointNum = vertices->m_localPos.size();
+	cVector3d *data = vertices->m_localPos.data();
+
+	for (int i = 0; i < pointNum; i++)
+	{
+		if (data[i].x() < extremePoint_xMinus.x())
+			extremePoint_xMinus = data[i];
+		else if (data[i].x() > extremePoint_xPlus.x())
+			extremePoint_xPlus = data[i];
+
+		if (data[i].y() < extremePoint_yMinus.y())
+			extremePoint_yMinus = data[i];
+		else if (data[i].y() > extremePoint_yPlus.y())
+			extremePoint_yPlus = data[i];
+
+		if (data[i].z() < extremePoint_zMinus.z())
+			extremePoint_zMinus = data[i];
+		else if (data[i].z() > extremePoint_zPlus.z())
+			extremePoint_zPlus = data[i];
+	}
+}
+
+double PhysModel::FindNearstPoint(int srcIndex, int& dstIndex)
+{
+	cVector3d srcPoint = vertices->m_localPos[srcIndex];
+	int pointNum = vertices->m_localPos.size();
+	cVector3d *data = vertices->m_localPos.data();
+
+	double miniDist = FLT_MAX;
+	int targIndex = 0;
+
+	for (int i = 0; i < pointNum; i++)
+	{
+		if (i == srcIndex)
+			continue;
+
+		if (cDistanceSq(srcPoint, data[i]) < miniDist)
+		{
+			targIndex = i;
+			miniDist = cDistanceSq(srcPoint, data[i]);
+		}
+	}
+
+	dstIndex = targIndex;
+	return sqrt(miniDist);
+}
+
+int PhysModel::FindPointCountWithinDst(int srcIndex, double dst)
+{
+	cVector3d srcPoint = vertices->m_localPos[srcIndex];
+	int pointNum = vertices->m_localPos.size();
+	cVector3d *data = vertices->m_localPos.data();
+
+	int count = 0;
+	for (int i = 0; i < pointNum; i++)
+	{
+		if (i == srcIndex)
+			continue;
+
+		if (cDistanceSq(srcPoint, data[i]) - dst * dst <= FLT_MIN)
+			count++;
+	}
+
+	return count;
+}
+
+//debug
+void PhysModel::OutputInfo(ArrayType type, uint start, uint count)
+{
+	switch (type)
+	{
+	case POSITION:
+	{
+		CopyArrayFromDevice(hPos.data(), 0, &vertsPos_resource, sizeof(double3) * numParticles);
+		for (unsigned i = start; i < start + count; i++)
+		{
+			std::cout << "pos" << i << ": " << hPos[i].x << " " << hPos[i].y << " " << hPos[i].z << std::endl;
+		}
+		break;
+	}
+	case VELOCITY:
+	{
+		CopyArrayFromDevice(hVel.data(), dVel, 0, sizeof(double3) * numParticles);
+		for (unsigned i = start; i < start + count; i++)
+		{
+			std::cout << "vel" << i << ": " << hVel[i].x << " " << hVel[i].y << " " << hVel[i].z << std::endl;
+		}
+		break;
+	}
+	case NEIGHBOR:
+	{
+		CopyArrayFromDevice(hNeighbors.data(), dNeighbors, 0, sizeof(int) * 26 * numParticles);
+		CopyArrayFromDevice(hNeighborCount.data(), dNeighborCount, 0, sizeof(uint) * numParticles);
+		for (unsigned i = start; i < start + count; i++)
+		{
+			uint neighborCount = hNeighborCount[i];
+			std::cout << "particle" << i << " has " << neighborCount << " neighbors: ";
+
+			for (unsigned j = 0; j < neighborCount; j++)
+			{
+				std::cout << hNeighbors[i * 26 + j] << " ";
+			}
+			std::cout << std::endl;
+		}
+		break;
+	}
+	case CELLSTART:
+	{
+		CopyArrayFromDevice(hCellStart.data(), dCellStart, 0, sizeof(uint) * physParam.numCells);
+		for (unsigned i = start; i < start + count; i++)
+		{
+			std::cout << "cell" << i << " start index: " << hCellStart[i] << std::endl;
+		}
+		break;
+	}
+	case CELLEND:
+	{
+		CopyArrayFromDevice(hCellEnd.data(), dCellEnd, 0, sizeof(uint) * physParam.numCells);
+		for (unsigned i = start; i < start + count; i++)
+		{
+			std::cout << "cell" << i << " end index: " << hCellEnd[i] << std::endl;
+		}
+		break;
+	}
+	default:
+		break;
+	}
+}
+
+void PhysModel::UpdateNeighbors()
+{
+	double3* dPos = (double3*)MapGLBufferObject(&vertsPos_resource);
+
+	// calculate grid hash
+	CalcHash(dGridParticleHash, dGridParticleIndex, dPos, numParticles);
+
+	// sort particles index based on hash
+	SortParticles(dGridParticleHash, dGridParticleIndex, numParticles);
+
+	// find start and end of each cell
+	FindCellStartEnd(dCellStart, dCellEnd, dGridParticleHash, numParticles, physParam.numCells);
+
+	// reorder particle arrays into sorted order
+	ReorderData(dSortedPos, dSortedVel, dGridParticleIndex, dPos, dVel, numParticles);
+
+	CopyArrayFromDevice(hSortedPos.data(), dSortedPos, 0, sizeof(double3) * numParticles);
+
+	//find neighbors
+	FindNeighborsWithinDst(dNeighbors, dNeighborCount, dGridParticleIndex, dSortedPos, 0.02, dCellStart, dCellEnd, numParticles);
+
+	UnMapGLBufferObject(vertsPos_resource);
+
+	CopyArrayFromDevice(hNeighbors.data(), dNeighbors, 0, sizeof(int) * 26 * numParticles);
+	CopyArrayFromDevice(hNeighborCount.data(), dNeighborCount, 0, sizeof(uint) * numParticles);
+}
+
+
+//------------------------------------------------------------------------
+// host find all particles neighbors
+//------------------------------------------------------------------------
+
+int3 PhysModel::HostCalcGridPos(double3 pos)
+{
+	int3 gridPos;
+	gridPos.x = floor((pos.x - physParam.worldOrigin.x) / physParam.cellSize.x);
+	gridPos.y = floor((pos.y - physParam.worldOrigin.y) / physParam.cellSize.y);
+	gridPos.z = floor((pos.z - physParam.worldOrigin.z) / physParam.cellSize.z);
+
+	return gridPos;
+}
+
+uint PhysModel::HostCalcGridHash(int3 gridPos)
+{
+	gridPos.x = gridPos.x & (physParam.gridSize.x - 1);  // wrap grid, assumes size is power of 2
+	gridPos.y = gridPos.y & (physParam.gridSize.y - 1);
+	gridPos.z = gridPos.z & (physParam.gridSize.z - 1);
+
+	return gridPos.z * physParam.gridSize.y * physParam.gridSize.x + gridPos.y * physParam.gridSize.x + gridPos.x;
+}
+
+void PhysModel::HostCalcHash()
+{
+	glBindBuffer(GL_ARRAY_BUFFER, vertices->m_positionBuffer);
+	double3 *hPos = (double3*)glMapBuffer(GL_ARRAY_BUFFER, GL_READ_ONLY);
+	for (unsigned i = 0; i < numParticles; i++)
+	{
+		int3 gridPos = HostCalcGridPos(hPos[i]);
+		uint hash = HostCalcGridHash(gridPos);
+
+		hGridParticleHash[i] = hash;
+		hGridParticleIndex[i] = i;
+	}
+	glUnmapBuffer(GL_ARRAY_BUFFER);
+}
+
+void PhysModel::HostSortParticles()
+{
+	/*std::vector<std::pair<uint, uint>> pairs;
+	pairs.resize(numParticles);
+	for (unsigned i = 0; i < numParticles; i++)
+	{
+		pairs[i] = std::make_pair(hGridParticleHash[i], hGridParticleIndex[i]);
+	}
+
+	std::sort(pairs.data(), pairs.data() + numParticles, [](const std::pair<uint, uint>&firstElem, const std::pair<uint, uint>& secElem) {
+		return firstElem.first < secElem.first;
+	});
+
+	for (unsigned i = 0; i < numParticles; i++)
+	{
+		hGridParticleHash[i] = pairs[i].first;
+		hGridParticleIndex[i] = pairs[i].second;
+	}*/
+	thrust::sort_by_key(thrust::host, hGridParticleHash.data(), hGridParticleHash.data() + numParticles, hGridParticleIndex.data());
+}
+
+void PhysModel::HostFindCellStartEnd()
+{
+	for (unsigned i = 0; i < numParticles; i++)
+	{
+		uint hash = hGridParticleHash[i];
+
+		if (i == 0 || (i > 0 && hash != hGridParticleHash[i - 1]))
+		{
+			hCellStart[hash] = i;
+			if (i > 0)
+				hCellEnd[hGridParticleHash[i - 1]] = i;
+		}
+		if (i == numParticles - 1)
+		{
+			hCellEnd[hash] = i + 1;
+		}
+	}
+}
+
+void PhysModel::HostReorderData()
+{
+	glBindBuffer(GL_ARRAY_BUFFER, vertices->m_positionBuffer);
+	double3 *hPos = (double3*)glMapBuffer(GL_ARRAY_BUFFER, GL_READ_ONLY);
+
+	for (unsigned i = 0; i < numParticles; i++)
+	{
+		uint sortedIndex = hGridParticleIndex[i];
+
+		hSortedPos[i] = hPos[sortedIndex];
+		hSortedVel[i] = hVel[sortedIndex];
+	}
+	glUnmapBuffer(GL_ARRAY_BUFFER);
+}
+
+void PhysModel::HostFindNeighborsWithinDst(double dst)
+{
+	for (unsigned i = 0; i < numParticles; i++)
+	{
+		uint originalIndex = hGridParticleIndex[i];
+		double3 pos = hSortedPos[i];
+		int3 gridPos = HostCalcGridPos(pos);
+
+		uint neighborId = 0;
+		for (int z = -1; z <= 1; z++)
+		{
+			for (int y = -1; y <= 1; y++)
+			{
+				for (int x = -1; x <= 1; x++)
+				{
+					int3 neighbourGridPos = gridPos + make_int3(x, y, z);
+					uint gridHash = HostCalcGridHash(neighbourGridPos);
+
+					uint startIndex = hCellStart[gridHash];
+					if (startIndex != 0xffffffff) //cell is not empty
+					{
+						uint endIndex = hCellEnd[gridHash];
+						for (int j = startIndex; j < endIndex; j++)
+						{
+							if (j != i)
+							{
+								double3 targPos = hSortedPos[j];
+								if (YH::Distance(pos, targPos) <= dst * dst)
+								{
+									if (neighborId >= 26)
+										break;
+
+									uint originalTargIndex = hGridParticleIndex[j];
+
+									hNeighbors[originalIndex * 26 + neighborId] = originalTargIndex; //默认每个particle周围最多有26个邻居
+									neighborId++;
+								}
+							}
+						}
+						hNeighborCount[originalIndex] = neighborId;
+					}
+				}
+			}
+		}
+	}
+}
+
+void PhysModel::HostUpdateNeighbors()
+{
+	HostCalcHash();
+	HostSortParticles();
+	HostFindCellStartEnd();
+	HostReorderData();
+	HostFindNeighborsWithinDst(physParam.Solid_1_EffectiveRadius * 5); //*5目的是找到26个邻居
 }

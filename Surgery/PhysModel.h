@@ -12,51 +12,13 @@ using namespace chai3d;
 
 enum ParticleType { SOLID_1, SOLID_2, LIQUID, GAS };
 
-typedef struct _PhysConstant
-{
-	//四种状态粒子初始质量
-	static double SOLID_1_Mass;
-	static double SOLID_2_Mass;
-	static double LIQUID_Mass;
-	static double GAS_Mass;
 
-	static double Solid_Density;
-	static double Liquid_Density;
-	static double Gas_Density;
-
-	static double Air_Temperature;
-
-	static double Split_Temperature; //SOLID_1 -> SOLID_2
-	static double Fusion_Temperature;//SOLID_2 -> LIQUID
-	static double Boil_Temperature; //LIQUID -> GAS
-	static double LatentHeat_Solid2Liquid;//SOLID_2 -> LIQUID
-	static double LatentHeat_Liquid2Gas;
-
-	static double Thermal_Conductivity; //h: Qi=h(Tair - Ti)*A
-	static double Thermal_Diffusion; //Cd： in heat transfer between particle
-	static double Heat_Capacity_Solid; //C: delta_T=Qi/C*m
-	static double Heat_Capacity_Liquid;
-	static double Heat_Capacity_Gas;
-
-	//光子参数
-	static double Emissivity;
-	static double Boltzmann_Constant;
-	static double Source_Temperature;
-	static double Source_Area;
-	static int PhotonsNum_TimeStep;//单位时间射出的光子数
-
-	//各种半径参数
-	static double Solid_1_EffectiveRadius; //re
-	static double Solid_2_EffectiveRadius;
-
-
-} PhysConstant;
 
 
 class PhysModel : public cGenericObject
 {
 public:
-	PhysModel();
+	PhysModel(std::string filename);
 	virtual ~PhysModel();
 	bool LoadFromASC(std::string filename);
 	void MarkForUpdate(const bool a_affectChildren);
@@ -167,21 +129,112 @@ protected:
 	// CUDA releated:
 	//------------------------------------------------------------------------------
 public:
+	enum ArrayType
+	{
+		POSITION,
+		VELOCITY,
+		NEIGHBOR,
+		CELLSTART,
+		CELLEND
+	};
+
+	//find xyz-minus xyz-plus extreme point
+	void FindExtremePoint();
+	double FindNearstPoint(int srcIndex, int& dstIndex);
+	int FindPointCountWithinDst(int srcIndex, double dst);
+
+	void OutputInfo(ArrayType type, uint start, uint count);//debug
+	void FreeMemory(); //释放与物理属性、cuda相关内存
+	void UpdateNeighbors();
+
+	int3 HostCalcGridPos(double3 p);
+	uint HostCalcGridHash(int3 gridPos);
+	void HostCalcHash();
+	void HostSortParticles();
+	void HostFindCellStartEnd();
+	void HostReorderData();
+	void HostFindNeighborsWithinDst(double dst);
+	void HostUpdateNeighbors();
+
+public:
 	bool isRegisterBuffer;
+
+	cVector3d extremePoint_xMinus;
+	cVector3d extremePoint_xPlus;
+	cVector3d extremePoint_yMinus;
+	cVector3d extremePoint_yPlus;
+	cVector3d extremePoint_zMinus;
+	cVector3d extremePoint_zPlus;
 	
 public:
 	cPointArrayPtr points;
-	cVertexArrayPtr vertices;	
+	cVertexArrayPtr vertices;
+
 	bool isDrawAsSphere;
 	double sphereRadius;
+	PhysParam physParam;
+	uint numParticles;
+	bool needUpdateNeighbors;
 
+	//CPU data
+	struct
+	{
+		std::vector<double3> hPos; //store vertices->m_localPos, 用作输出，注意m_localpos中的值会被缩放影响，hPos可能需要相应更新
+		std::vector<double3> hVel; //store velocity
+		struct cudaGraphicsResource *vertsPos_resource;
+
+		//data for neighbor find
+		std::vector<int> hNeighbors; //保存邻居索引，length = 26 * particles count
+		std::vector<uint> hNeighborCount;
+
+		std::vector<double3> hSortedPos;
+		std::vector<double3> hSortedVel;
+
+		std::vector<uint> hGridParticleHash;//暂时没用
+		std::vector<uint> hGridParticleIndex;
+		std::vector<uint> hCellStart;
+		std::vector<uint> hCellEnd;
+
+		//data for haptic force
+		std::vector<int> hNearbyIdx;
+		uint hNearbyCount;
+
+		//data for pbd
+		std::vector<double3> hPredictPos;
+		std::vector<double> hInvMass;
+	};
+
+	//GPU data
+	struct
+	{
+		double3 *dVel; //velocity on GPU
+
+		//data for neighbor find
+		int* dNeighbors; //length = 26 * particles count
+		uint* dNeighborCount;
+
+		double3 *dSortedPos;
+		double3 *dSortedVel;
+
+		uint *dGridParticleHash; // grid hash value for each particle
+		uint *dGridParticleIndex;// particle index for each particle
+		uint *dCellStart;        // index of start of each cell in sorted list
+		uint *dCellEnd;          // index of end of cell
+
+		//data for haptic force
+		int *dNearbyIdx;
+		uint *dNearbyCount;
+
+		//data for pbd
+		double3 *dPredictPos;
+		double *dInvMass;
+	};
 protected:
 	bool m_showPoints; //! If __true__, then segments are displayed.
 	double m_pointSize; //! Display size of point.
 
 public:
-	std::vector<double> masses;
-	std::vector<cVector3d> velocities;
+	
 	std::vector<double> temperatures;
 	std::vector<double> lastTemperatures;
 	std::vector<ParticleType> particleTypes;

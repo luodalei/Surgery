@@ -112,6 +112,12 @@
     <Filter Include="external\theoraplayer">
       <UniqueIdentifier>{210d7e17-d271-4658-82d6-770dce81942d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="PBD">
+      <UniqueIdentifier>{9586c9cc-008d-4786-b463-2eee5b738318}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="测试文件">
+      <UniqueIdentifier>{aba12f61-2c66-4b11-9866-6d4a10bf5a19}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\GLAD\src\glad.c">
@@ -133,9 +139,6 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="Utilities.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="SurgeryMain.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="..\external\giflib\src\dev2gif.c">
@@ -1071,6 +1074,15 @@
     <ClCompile Include="..\chai3d\src\shaders\CShaderProgram.cpp">
       <Filter>chai3d\shaders</Filter>
     </ClCompile>
+    <ClCompile Include="PhysSystem.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="PBDSystem.cpp">
+      <Filter>PBD</Filter>
+    </ClCompile>
+    <ClCompile Include="TestMain_PBD.cpp">
+      <Filter>测试文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\GLAD\include\glad\glad.h">
@@ -1516,6 +1528,15 @@
     </ClInclude>
     <ClInclude Include="Deformation.cuh">
       <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysParam.cuh">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysSystem.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="PBDSystem.h">
+      <Filter>PBD</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -56,8 +56,6 @@ cFrequencyCounter freqCounterHaptics;
 // haptic thread
 cThread* hapticsThread;
 #endif
-// a few shape primitives that compose our scene
-cMultiMesh* g_pBunny;
 
 // a font for rendering text
 cFontPtr font;
@@ -81,10 +79,166 @@ cFrequencyCounter freqCounterGraphics;
 WindowYH* g_pWindow = NULL;
 
 //particle物理模型
-PhysModel* g_pPhysModel;
+typedef struct _YHInt2 {
+	int x, y;
 
-//PBD系统
-PBDSystem* g_pPBDSystem;
+	_YHInt2(int _x, int _y) :
+		x(_x),
+		y(_y)
+	{
+	}
+
+	_YHInt2()
+	{
+	}
+} YHInt2;
+
+std::vector<cShapeSphere*> g_pSpheres;
+const uint g_numSpheres = 25;
+const uint g_numEdges = 72;
+const uint g_numSphere_X = 5;
+const uint g_numSphere_Y = 5;
+const uint g_numSphere_Z = 3;
+
+cVector3d g_InitPoses[g_numSpheres] = {
+	cVector3d(-0.5, 0.5, 0), cVector3d(-0.25, 0.5, 0), cVector3d(0, 0.5, 0), cVector3d(0.25, 0.5, 0), cVector3d(0.5, 0.5, 0),
+	cVector3d(-0.5, 0.25, 0), cVector3d(-0.25, 0.25, 0), cVector3d(0, 0.25, 0), cVector3d(0.25, 0.25, 0), cVector3d(0.5, 0.25, 0),
+	cVector3d(-0.5, 0, 0), cVector3d(-0.25, 0, 0), cVector3d(0.0, 0.0, 0), cVector3d(0.25, 0, 0), cVector3d(0.5, 0, 0),
+	cVector3d(-0.5, -0.25, 0), cVector3d(-0.25, -0.25, 0), cVector3d(0, -0.25, 0), cVector3d(0.25, -0.25, 0), cVector3d(0.5, -0.25, 0),
+	cVector3d(-0.5, -0.5, 0), cVector3d(-0.25, -0.5, 0), cVector3d(0, -0.5, 0), cVector3d(0.25, -0.5, 0), cVector3d(0.5, -0.5, 0),
+
+	/*cVector3d(-0.5, 0.5, -0.25), cVector3d(-0.25, 0.5, -0.25), cVector3d(0, 0.5, -0.25), cVector3d(0.25, 0.5, -0.25), cVector3d(0.5, 0.5, -0.25),
+	cVector3d(-0.5, 0.25, -0.25), cVector3d(-0.25, 0.25, -0.25), cVector3d(0, 0.25, -0.25), cVector3d(0.25, 0.25, -0.25), cVector3d(0.5, 0.25, -0.25),
+	cVector3d(-0.5, 0, -0.25), cVector3d(-0.25, 0, -0.25), cVector3d(0.0, 0.0, -0.25), cVector3d(0.25, 0, -0.25), cVector3d(0.5, 0, -0.25),
+	cVector3d(-0.5, -0.25, -0.25), cVector3d(-0.25, -0.25, -0.25), cVector3d(0, -0.25, -0.25), cVector3d(0.25, -0.25, -0.25), cVector3d(0.5, -0.25, -0.25),
+	cVector3d(-0.5, -0.5, -0.25), cVector3d(-0.25, -0.5, -0.25), cVector3d(0, -0.5, -0.25), cVector3d(0.25, -0.5, -0.25), cVector3d(0.5, -0.5, -0.25)*/
+};
+
+YHInt2 g_Edges[g_numEdges] = {
+	//行
+	YHInt2(0, 1), YHInt2(1, 2), YHInt2(2, 3), YHInt2(3, 4),
+	YHInt2(5, 6), YHInt2(6, 7), YHInt2(7, 8), YHInt2(8, 9),
+	YHInt2(10, 11), YHInt2(11, 12), YHInt2(12, 13), YHInt2(13, 14),
+	YHInt2(15, 16), YHInt2(16, 17), YHInt2(17, 18), YHInt2(18, 19),
+	YHInt2(20, 21), YHInt2(21, 22), YHInt2(22, 23), YHInt2(23, 24),
+
+	//列
+	YHInt2(0, 5), YHInt2(5, 10), YHInt2(10, 15), YHInt2(15, 20),
+	YHInt2(1, 6), YHInt2(6, 11), YHInt2(11, 16), YHInt2(16, 21),
+	YHInt2(2, 7), YHInt2(7, 12), YHInt2(12, 17), YHInt2(17, 22),
+	YHInt2(3, 8), YHInt2(8, 13), YHInt2(13, 18), YHInt2(18, 23),
+	YHInt2(4, 9), YHInt2(9, 14), YHInt2(14, 19), YHInt2(19, 24),
+
+	//右斜
+	YHInt2(0, 6), YHInt2(1, 7), YHInt2(2, 8), YHInt2(3, 9),
+	YHInt2(5, 11), YHInt2(6, 12), YHInt2(7, 13), YHInt2(8, 14),
+	YHInt2(10, 16), YHInt2(11, 17), YHInt2(12, 18), YHInt2(13, 19),
+	YHInt2(15, 21), YHInt2(16, 22), YHInt2(17, 23), YHInt2(18, 24),
+
+	//左斜
+	YHInt2(1, 5), YHInt2(2, 6), YHInt2(3, 7), YHInt2(4, 8),
+	YHInt2(6, 10), YHInt2(7, 11), YHInt2(8, 12), YHInt2(9, 13),
+	YHInt2(11, 15), YHInt2(12, 16), YHInt2(13, 17), YHInt2(14, 18),
+	YHInt2(16, 20), YHInt2(17, 21), YHInt2(18, 22), YHInt2(19, 23),
+};
+
+double g_InitInvMasses[g_numSpheres] = {
+	1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1
+};
+
+std::vector<cVector3d> g_SpherePoses;
+std::vector<cVector3d> g_SphereOldPoses;
+std::vector<cVector3d> g_SphereVels;
+std::vector<double> g_SphereInvMasses;
+double g_dt = 0.01;
+
+typedef struct _YHDistanceConstraint {
+
+public:
+	_YHDistanceConstraint() 
+	{
+
+	}
+
+	bool InitConstraint(cVector3d* originalPos, const unsigned i1, const unsigned i2)
+	{
+		vIdx[0] = i1;
+		vIdx[1] = i2;
+
+		const cVector3d &x1_0 = originalPos[i1];
+		const cVector3d &x2_0 = originalPos[i2];
+
+		restLength = (x2_0 - x1_0).length();
+
+		return true;
+	}
+
+	bool SolveConstraint(cVector3d* pos, double* invMasses)
+	{
+		const unsigned i1 = vIdx[0];
+		const unsigned i2 = vIdx[1];
+
+		cVector3d &x1 = pos[i1];
+		cVector3d &x2 = pos[i2];
+
+/*		std::cout << "i1, i2: " << i1 << " " << i2 << std::endl;
+		std::cout << "x1: " << x1.x() << " " << x1.y() << " " << x1.z() << std::endl;
+		std::cout << "x2: " << x2.x() << " " << x2.y() << " " << x2.z() << std::endl;
+*/
+		const double invMass1 = invMasses[i1];
+		const double invMass2 = invMasses[i2];
+
+		const double wSum = invMass1 + invMass2;
+		if (wSum == 0.0)
+			return false;
+
+//		std::cout << "wSum: " << wSum << std::endl;
+
+		cVector3d n = x1 - x2;
+		double d = n.length();
+		n.normalize();
+
+//		std::cout << "d: " << d << std::endl;
+
+		cVector3d corr, corr1, corr2;
+		if (d < restLength)
+			corr = compressionStiffness * n * (d - restLength) / wSum;
+		else
+			corr = stretchStiffness * n * (d - restLength) / wSum;
+
+//		std::cout << "corr: " << corr << std::endl;
+
+		//这里跟position-based-dynamics-master项目中负号相反
+		corr1 = -invMass1 * corr;
+		corr2 = invMass2 * corr;
+
+		if (invMass1 != 0.0)
+			x1 += corr1;
+		if (invMass2 != 0.0)
+			x2 += corr2;
+
+/*		std::cout << "new-x1: " << x1.x() << " " << x1.y() << " " << x1.z() << std::endl;
+		std::cout << "new-x2: " << x2.x() << " " << x2.y() << " " << x2.z() << std::endl << std::endl;
+*/
+		return true;
+	}
+
+public:
+	//indices of linked verts
+	unsigned vIdx[2];
+
+	//distance constraint
+	double restLength;
+	
+	static double compressionStiffness;
+	static double stretchStiffness;
+
+} YHDistanceConstraint;
+
+double YHDistanceConstraint::compressionStiffness = 0.8;
+double YHDistanceConstraint::stretchStiffness = 0.8;
+
+std::vector<YHDistanceConstraint*> g_DistanceConstraints;
 
 //physModel接收tool的力，按下F开启/关闭
 bool applyForceToPhysModel = false;
@@ -93,13 +247,13 @@ bool applyForceToPhysModel = false;
 cVector3d toolGlobalPos;        // global world coordinates
 cVector3d toolLocalPos;         // local coordinates
 
-// previous tool position
+								// previous tool position
 cVector3d prevToolGlobalPos;    // global world coordinates
 cVector3d prevToolLocalPos;     // local coordinates
 
 
-// state machine 
-enum STATE 
+								// state machine 
+enum STATE
 {
 	STATE_IDLE,
 	STATE_MODIFY_OBJECT,
@@ -125,15 +279,19 @@ void updateGraphics(void);
 
 // this function contains the main haptics simulation loop
 void updateHaptics(void);
-void updateHapticsTest(void);
 
 // this function closes the application
 void close(void);
 
 //yyh添加
+//compute vel & pos
+void SemiImplicitEuler(const double dt, const double invMass, const cVector3d force, cVector3d& position, cVector3d& velocity);
+
+//velocity update first order
+void VelocityUpdateFirstOrder(const double dt, const double invMass, const cVector3d &position, const cVector3d &oldPosition, cVector3d &velocity);
 
 //phys deformation
-void PhysDeformation(PhysModel* physModel, PBDSystem* pbdSystem, cVector3d toolPosInModelSpace, cVector3d toolForceInModelSpace, bool applyForceOnPhysModel);
+void PhysDeformation(cVector3d toolPos, cVector3d toolForce, double dst, bool applyForceOnPhysModel);
 
 
 //==============================================================================
@@ -266,7 +424,7 @@ int main(int argc, char* argv[])
 		gui->addGroup("Physics");
 		gui->addVariable("Draw Particles", NanoGUIInfo::isDrawParticles);
 		gui->addVariable("Particle Color", NanoGUIInfo::particleColor);
-		
+
 		screen->setVisible(true);
 		screen->performLayout();
 	}
@@ -290,8 +448,8 @@ int main(int argc, char* argv[])
 		cVector3d(0.0, 0.0, 0.0),    // lookat position (target)
 		cVector3d(0.0, 0.0, 1.0));   // direction of the (up) vector
 
-	// set the near and far clipping planes of the camera
-	camera->setClippingPlanes(0.01, 10.0);
+									 // set the near and far clipping planes of the camera
+	camera->setClippingPlanes(0.01, 100.0);
 
 	// set stereo mode
 	camera->setStereoMode(stereoMode);
@@ -377,114 +535,70 @@ int main(int argc, char* argv[])
 	double maxLinearForce = cMin(hapticDeviceInfo.m_maxLinearForce, 7.0);
 
 #endif
+
 	////////////////////////////////////////////////////////////////////////////
-	// SHAPE - Soft bunny
+	// Sphere Model
 	////////////////////////////////////////////////////////////////////////////
-	g_pBunny = new cMultiMesh();
-	world->addChild(g_pBunny);//暂时注释掉，方便调试physmodel着色器
-	bool fileLoad = g_pBunny->loadFromFile("../resources/SoftBunny-1858.obj");
-	if (!fileLoad)
+	g_pSpheres.resize(g_numSpheres);
+	g_SpherePoses.clear();
+	g_SphereOldPoses.clear();
+
+	cMaterial matSphere;
+	matSphere.setWhiteAliceBlue();
+	for (unsigned i = 0; i < g_numSpheres; i++)
 	{
-		cout << "Error - 3D Model failed to load correctly." << endl;
+		g_pSpheres[i] = new cShapeSphere(0.04);
+		world->addChild(g_pSpheres[i]);
+		g_pSpheres[i]->setMaterial(matSphere);
+		g_pSpheres[i]->setShowEnabled(true);
+
+		//初始化位置
+		g_SpherePoses.push_back(g_InitPoses[i]);
+		g_SphereOldPoses.push_back(g_InitPoses[i]);
 	}
 
-	//-------------------------------set graphics attribute-------------------------
-//	g_pBunny->scale(0.3);
+	//初始化速度
+	g_SphereVels.resize(g_numSpheres, cVector3d(0, 0, 0));
 
-	// rotate the object 90 degrees
-	g_pBunny->rotateAboutGlobalAxisDeg(cVector3d(1, 0, 0), 90);
-	g_pBunny->rotateAboutGlobalAxisDeg(cVector3d(0, 0, 1), 90);
-
-	// enable haptic rendering on both sides of triangles
-	cMaterial mat;
-
-	mat.m_ambient = cColorf(0.3, 0.3, 0.3);
-	mat.m_diffuse = cColorf(0.7, 0.7, 0.7);
-	mat.m_specular = cColorf(0.1, 0.1, 0.1);
-	mat.setShininess(32);
-
-	mat.setHapticTriangleSides(true, false);
-	g_pBunny->setMaterial(mat);
-
-	//enable face-culling
-	g_pBunny->setUseCulling(true);
-
-	// create program shader
-	cShaderProgramPtr shaderProgram = cShaderProgram::create(C_SHADER_FONG_VERT, C_SHADER_FONG_FRAG);
-	shaderProgram->setUniformi("uShadowMap", C_TU_SHADOWMAP);
-	g_pBunny->setShaderProgram(shaderProgram);
-
-	g_pBunny->setTransparencyLevel(0.7);
-
-	//--------------------------set haptic attribute------------------------------
-#ifdef FINALLY_USE_HAPTIC
-	// create collision detector
-	g_pBunny->createAABBCollisionDetector(toolRadius);//必须要有！
-
-	// set stiffness property
-	g_pBunny->setStiffness(maxStiffness, true);
-
-	// define some haptic friction properties
-	g_pBunny->setFriction(0.1, 0.2, true);
-#endif
-
-	g_pBunny->setEnabled(true);
-
-	////////////////////////////////////////////////////////////////////////////
-	// PhysModel
-	////////////////////////////////////////////////////////////////////////////
-	g_pPhysModel = new PhysModel("../resources/PointClouds/SoftBunny-1858-43250p.asc");	
-
-	world->addChild(g_pPhysModel);
-
-	//--------------------------set graphics attribute---------------------------
-//	g_pPhysModel->scale(0.3);
-
-	// rotate the object 90 degrees
-	g_pPhysModel->rotateAboutGlobalAxisDeg(cVector3d(1, 0, 0), 90);
-	g_pPhysModel->rotateAboutGlobalAxisDeg(cVector3d(0, 0, 1), 90);
-
-	g_pPhysModel->SetPointSize(2.0);
-
-	g_pPhysModel->SetPointColor(cColorf(1.0, 1.0, 1.0));
-	//g_pPhysModel->DrawAsSphere(true); //把点画成球
-
-	//set shader
-	cShaderPtr vertexShader = cShader::create(C_VERTEX_SHADER);
-	vertexShader->loadSourceFile(RESOURCE_PATH("../resources/Point.vert"));
-
-	cShaderPtr geometryShader = cShader::create(C_GEOMETRY_SHADER);
-	geometryShader->loadSourceFile(RESOURCE_PATH("../resources/PointTry.geom"));
-
-	cShaderPtr fragmentShader = cShader::create(C_FRAGMENT_SHADER);
-	fragmentShader->loadSourceFile(RESOURCE_PATH("../resources/Point.frag"));
-
-	cShaderProgramPtr programShader = cShaderProgram::create();
-	programShader->attachShader(vertexShader);
-	//programShader->attachShader(geometryShader);
-	programShader->attachShader(fragmentShader);
-
-	programShader->setGeometryInputType(GL_POINTS);
-	programShader->setGeometryOutputType(GL_POINTS);
-	programShader->setGeometryVerticesOut(1);
-	programShader->linkProgram();
-
-	g_pPhysModel->setShaderProgram(programShader);
-
-
-	////////////////////////////////////////////////////////////////////////////
-	// PbdSystem
-	////////////////////////////////////////////////////////////////////////////
-	g_pPBDSystem = new PBDSystem(g_pPhysModel);
-
-
+	//初始化质量
+	for (unsigned i = 0; i < g_numSpheres; i++)
+	{
+		g_SphereInvMasses.push_back(g_InitInvMasses[i]);
+	}
 
 	////////////////////////////////////////////////////////////////////////////
 	// Constraints
 	////////////////////////////////////////////////////////////////////////////
-	cMultiSegment *segments = new cMultiSegment();
-	bool isInitSegMentData = false;
-	
+	cMultiSegment* segments = new cMultiSegment();
+	world->addChild(segments);
+
+	for (unsigned i = 0; i < g_numSpheres; i++)
+	{
+		segments->newVertex(g_InitPoses[i]);
+	}
+	for (unsigned i = 0; i < g_numEdges; i++)
+	{
+		segments->newSegment(g_Edges[i].x, g_Edges[i].y);
+	}
+
+	segments->setLineColor(cColorf(0.0, 1.0, 0.0));
+	segments->setUseDisplayList(true);
+	segments->setEnabled(true);
+
+	//初始化约束
+	for (unsigned i = 0; i < g_numEdges; i++)
+	{
+		const unsigned i1 = g_Edges[i].x;
+		const unsigned i2 = g_Edges[i].y;
+
+		YHDistanceConstraint *c = new YHDistanceConstraint();
+		bool res = c->InitConstraint(g_InitPoses, i1, i2);
+		if (res)
+		{
+			g_DistanceConstraints.push_back(c);
+		}
+	}
+
 	//--------------------------------------------------------------------------
 	// WIDGETS
 	//--------------------------------------------------------------------------
@@ -529,77 +643,27 @@ int main(int argc, char* argv[])
 		// process events
 		glfwPollEvents();
 
-
 		// render graphics
 		updateGraphics(); //first time register buffer to cuda
 
-		//find particles near tool pos
-		//把tool的世界坐标转到模型局部坐标
-		cMatrix3d localRot = g_pPhysModel->getLocalRot();
-		cMatrix3d world_T_local;
-		localRot.transr(world_T_local);
-
-		cVector3d localContactPos;
-		world_T_local.mulr(toolGlobalPos, localContactPos);
-
-		cVector3d toolGlobalForce = tool->getDeviceGlobalForce();
-		cVector3d localContactForce;
-		world_T_local.mulr(toolGlobalForce, localContactForce);
-
-		/*for (unsigned i = 0; i < g_pPhysModel->vertices->m_localPos.size(); i++)
-		{
-			cVector3d particlePos = g_pPhysModel->vertices->m_localPos[i];
-
-			if (cDistance(localContactPos, particlePos) <= 0.1)
-			{
-				g_pPhysModel->vertices->setColor(i, cColorb(255, 0, 0));
-			}
-			else
-			{
-				g_pPhysModel->vertices->setColor(i, cColorb(255, 255, 255));
-			}
-		}*/
-		
 		//phys deformation
-		PhysDeformation(g_pPhysModel, g_pPBDSystem, localContactPos, localContactForce, applyForceToPhysModel);
+		cVector3d toolForce(0, -10, 0);
+		//std::cout << toolGlobalPos.x() << " " << toolGlobalPos.y() << " " << toolGlobalPos.z() << std::endl;
+		PhysDeformation(toolGlobalPos, toolForce, 0.1, applyForceToPhysModel);
 
-		//在更新了邻居信息后才能绘制
-		/*if (!isInitSegMentData)
+		//更新圆球位置
+		for (unsigned i = 0; i < g_numSpheres; i++)
 		{
-			world->addChild(segments);
+			g_pSpheres[i]->setLocalPos(g_SpherePoses[i]);
+		}
 
-			segments->m_vertices = g_pPhysModel->vertices;
-
-			int2 *constraints = g_pPBDSystem->hDistanceConstraints.data();
-			for (unsigned i = 0; i < g_pPBDSystem->hNumDistanceConstraints; i++)
-			{
-				int p0 = constraints[i].x;
-				int p1 = constraints[i].y;
-
-				segments->newSegment(p0, p1);
-			}
-
-			segments->rotateAboutGlobalAxisDeg(cVector3d(1, 0, 0), 90);
-			segments->rotateAboutGlobalAxisDeg(cVector3d(0, 0, 1), 90);
-			segments->setLineColor(cColorf(0.0, 1.0, 0.0));
-			segments->setUseDisplayList(true);
-
-			segments->setEnabled(true);
-
-			isInitSegMentData = true;
-		}*/
-		//根据变动的粒子位置绘制约束
-		/*else
+		//更新约束位置
+		for (unsigned i = 0; i < g_numSpheres; i++)
 		{
-			glBindBuffer(GL_ARRAY_BUFFER, g_pPhysModel->vertices->m_positionBuffer);
-			cVector3d *pos = (cVector3d*)glMapBuffer(GL_ARRAY_BUFFER, GL_READ_ONLY);
-
-			for (unsigned i = 0; i < g_pPhysModel->numParticles; i++)
-			{
-				segments->m_vertices->setLocalPos(i, pos[i]);
-			}
-			glUnmapBuffer(GL_ARRAY_BUFFER);
-		}*/
+			segments->m_vertices->setLocalPos(i, g_SpherePoses[i]);
+			segments->markForUpdate(false);
+		}
+		
 
 #ifdef FINALLY_USE_NANOGUI
 		//nanogui
@@ -696,91 +760,153 @@ void close(void)
 
 //------------------------------------------------------------------------------
 
-//phys deformation
-void PhysDeformation(PhysModel* physModel, PBDSystem* pbdSystem, cVector3d toolPosInModelSpace, cVector3d toolForceInModelSpace, bool applyForceOnPhysModel)
+//semi implicit
+void SemiImplicitEuler(const double dt, const double invMass, const cVector3d force, cVector3d& position, cVector3d& velocity)
 {
-/*
-	 update neighboring
+	if (invMass != 0.0)
+	{
+		velocity += force * invMass * dt;
+		position += velocity * dt;
+	}
+}
 
-	 update distance constraint (add/delete)
-	 update volume constraint (add/delete)
-	 ...
-	 
-	 do pbd
-		1. init velocity
-		2. predict pos
-		3. use constraints correct pos
-		4. update pos & velocity
-*/
-	physModel->HostUpdateNeighbors();
+void VelocityUpdateFirstOrder(const double dt, const double invMass, const cVector3d &position, const cVector3d &oldPosition, cVector3d &velocity)
+{
+	if (invMass != 0.0)
+	{
+		velocity = (1.0 / dt) * (position - oldPosition);
+	}
+}
+
+//phys deformation
+void PhysDeformation(cVector3d toolPos, cVector3d toolForce, double dst, bool applyForceOnPhysModel)
+{
+	/*
+	update neighboring
+
+	update distance constraint (add/delete)
+	update volume constraint (add/delete)
+	...
+
+	do pbd
+	1. init velocity
+	2. predict pos
+	3. use constraints correct pos
+	4. update pos & velocity
+	*/
+
+	cMaterial matSphereRed;
+	matSphereRed.setRedDark();
+	cMaterial matSphereWhite;
+	matSphereWhite.setWhiteAliceBlue();
+
+	cVector3d force;
+	if (applyForceOnPhysModel)
+		force = toolForce;
+	else
+		force = cVector3d(0, 0, 0);
+
+	//计算速度/预测位置
+	for (unsigned i = 0; i < g_numSpheres; i++)
+	{
+		g_SphereOldPoses[i] = g_SpherePoses[i];
+
+		cVector3d& pos = g_SpherePoses[i];
+		cVector3d& vel = g_SphereVels[i];
+		double invMass = g_SphereInvMasses[i];
+		cVector3d forceOnParticle(0, 0, 0);
+
+		if (cDistanceSq(toolPos, pos) <= dst * dst)
+		{
+			if (applyForceOnPhysModel)
+				std::cout << "开启受力&接触到球体" << std::endl;
+			forceOnParticle = force;
+			g_pSpheres[i]->setMaterial(matSphereRed);
+		}
+		else
+		{
+			forceOnParticle = cVector3d(0, 0, 0);
+			g_pSpheres[i]->setMaterial(matSphereWhite);
+		}
+		SemiImplicitEuler(g_dt, invMass, forceOnParticle, pos, vel); 
+	}
+
+	//执行约束
+	for (unsigned i = 0; i < g_DistanceConstraints.size(); i++)
+	{
+		g_DistanceConstraints[i]->SolveConstraint(g_SpherePoses.data(), g_SphereInvMasses.data());
+	}
 	
-	pbdSystem->ComputeDistanceConstraints();
-	//pbdSystem->ComputeVolumeConstraints();
-	//pbdSystem->HostInitCubeVolumeConstraints();
-	//pbdSystem->HostInitShapeMatchingConstraints();
-
-	pbdSystem->HostDoPBD(toolPosInModelSpace, toolForceInModelSpace, applyForceOnPhysModel);
+	////更新速度
+	for (unsigned i = 0; i < g_numSpheres; i++)
+	{
+		cVector3d& pos = g_SpherePoses[i];
+		cVector3d& oldPos = g_SphereOldPoses[i];
+		cVector3d& vel = g_SphereVels[i];
+		double invMass = g_SphereInvMasses[i];
+		VelocityUpdateFirstOrder(g_dt, invMass, pos, oldPos, vel);
+	}
 }
 
 //phys phase change
 void PhysPhaseChange(PhysModel* physModel)
 {
-/*	compute heat absorbed
-		if(particle is SOLID)
-		{
-			1. heat from air
+	/*	compute heat absorbed
+	if(particle is SOLID)
+	{
+	1. heat from air
 
-			2. heat from neighboring
-		}
+	2. heat from neighboring
+	}
 
-		3. heat from heat source
-	
+	3. heat from heat source
+
 	compute phase change
-		1. compute delT from absorbed heat
-		if(particle is SOLID)
-		{
-			if(T reaches threshold T)
-				Gen n SOLID2 particle in SOLID neighboring
-				SOLID delete;
-			else
-				SOLID T += delT
-		}
-		if(particle is SOLID2)
-		{
-			if(T reaches melting point)
-			{
-				compute percentage of liquid r = Qhole / (Lf * density * volume)
-				compute mass of free liquid
-				SOLID2 mass -= mass of free liquid
+	1. compute delT from absorbed heat
+	if(particle is SOLID)
+	{
+	if(T reaches threshold T)
+	Gen n SOLID2 particle in SOLID neighboring
+	SOLID delete;
+	else
+	SOLID T += delT
+	}
+	if(particle is SOLID2)
+	{
+	if(T reaches melting point)
+	{
+	compute percentage of liquid r = Qhole / (Lf * density * volume)
+	compute mass of free liquid
+	SOLID2 mass -= mass of free liquid
 
-				if(SOLID2 mass <=0)
-					SOLID2 delete;
+	if(SOLID2 mass <=0)
+	SOLID2 delete;
 
-				while(mass of free liquid >= mass of a liquid particle)
-				{
-					Gen a liquid particle in SOLID2 neighboring
-					mass of free liquid -= liquid particle mass
-				}
-			}
-			else
-				SOLID2 T += delT
-		}
-		if(particle is LIQUID)
-		{
-			if(T reaches boiling point)
-			{
-				compute percentage of gas r = Qhole / (Lf * density * volume)
-				compute mass of free gas
-				LIQUID mass -= mass of free gas
+	while(mass of free liquid >= mass of a liquid particle)
+	{
+	Gen a liquid particle in SOLID2 neighboring
+	mass of free liquid -= liquid particle mass
+	}
+	}
+	else
+	SOLID2 T += delT
+	}
+	if(particle is LIQUID)
+	{
+	if(T reaches boiling point)
+	{
+	compute percentage of gas r = Qhole / (Lf * density * volume)
+	compute mass of free gas
+	LIQUID mass -= mass of free gas
 
-				if(LIQUID mass <=0)
-					LIQUID delete;
-			}
-			else
-				LIQUID T += delT
-		}
-	
-*/
+	if(LIQUID mass <=0)
+	LIQUID delete;
+	}
+	else
+	LIQUID T += delT
+	}
+
+	*/
 }
 
 //------------------------------------------------------------------------------
@@ -804,15 +930,6 @@ void updateGraphics(void)
 	scope->setSignalValues(tool->getDeviceGlobalForce().length());
 #endif
 
-	/////////////////////////////////////////////////////////////////////
-	// UPDATE MODEL
-	/////////////////////////////////////////////////////////////////////
-
-	// update object normals
-	if (state == STATE_MODIFY_OBJECT)
-	{
-		g_pBunny->computeAllNormals();
-	}
 
 	/////////////////////////////////////////////////////////////////////
 	// RENDER SCENE
@@ -845,12 +962,8 @@ void updateHaptics(void)
 	simulationRunning = true;
 	simulationFinished = false;
 
-
 	state = STATE_IDLE;
 
-	//用于处理tool与物体接触，pick particle
-	cGenericObject* object = NULL;
-	cTransform tool_T_object;
 
 	// main haptic simulation loop
 	while (simulationRunning)
@@ -885,7 +998,6 @@ void updateHaptics(void)
 
 		// read user switch
 		bool userSwitch0 = tool->getUserSwitch(0);//控制摄像机移动
-		bool userSwitch1 = tool->getUserSwitch(1);//让物体变形
 
 		// update tool position
 		toolGlobalPos = tool->getDeviceGlobalPos();
@@ -898,45 +1010,11 @@ void updateHaptics(void)
 		if (state == STATE_MOVE_CAMERA && !userSwitch0)
 		{
 			state = STATE_IDLE;
-
-			// enable haptic interaction with map
-			g_pBunny->setHapticEnabled(true, true);
-		}
-		else if (((state == STATE_MODIFY_OBJECT) && (!userSwitch1)) || ((state == STATE_MODIFY_OBJECT) && (!tool->isInContact(g_pBunny))))
-		{
-			state = STATE_IDLE;
-
-			// enable haptic interaction with map
-			g_pBunny->setHapticEnabled(true, true);
-
-			// disable forces, 模型可能发生改变，先把力反馈关掉，重新建立AABB碰撞检测
-			tool->setForcesOFF();
-
-			// update bounding box (can take a little time)
-			g_pBunny->createAABBCollisionDetector(toolRadius);
-
-			// enable forces again
-			tool->setForcesON();
-
 		}
 		else if (state == STATE_IDLE && userSwitch0)
 		{
 			state = STATE_MOVE_CAMERA;
 
-			// disable haptic interaction with object
-			g_pBunny->setHapticEnabled(false, true);
-
-		}
-		else if (state == STATE_IDLE && userSwitch1)
-		{
-			// start deforming object
-			if (tool->m_hapticPoint->getNumCollisionEvents() > 0)
-			{
-				state = STATE_MODIFY_OBJECT;
-
-				// disable haptic interaction with map
-				g_pBunny->setHapticEnabled(false, true);
-			}
 		}
 		else if (state == STATE_MOVE_CAMERA)
 		{
@@ -954,12 +1032,7 @@ void updateHaptics(void)
 			// oriente tool with camera
 			tool->setLocalRot(camera->getLocalRot());
 		}
-		else if (state == STATE_MODIFY_OBJECT)
-		{
-			//pick particle
-			
-		}
-		
+
 
 		// store tool position
 		prevToolLocalPos = toolLocalPos;
